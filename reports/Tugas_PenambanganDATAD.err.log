@@ -1,0 +1,55 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+
+
+# Model KNN untuk deteksi outlier (k=5) dengan Euclidean Distance
+knn_model = KNN(n_neighbors=5, method="euclidean", contamination=0.05)  # 5% data dianggap outlier
+knn_model.fit(X_scaled)
+
+# Prediksi outlier (1 = outlier, 0 = normal)
+outlier_predictions = knn_model.predict(X_scaled)
+
+# Menambahkan kolom hasil deteksi ke dataset
+data["outlier"] = outlier_predictions
+
+# Menampilkan jumlah outlier
+print("Jumlah outlier yang terdeteksi:", sum(outlier_predictions))
+
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mAttributeError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[18], line 3[0m
+[1;32m      1[0m [38;5;66;03m# Model KNN untuk deteksi outlier (k=5) dengan Euclidean Distance[39;00m
+[1;32m      2[0m knn_model [38;5;241m=[39m KNN(n_neighbors[38;5;241m=[39m[38;5;241m5[39m, method[38;5;241m=[39m[38;5;124m"[39m[38;5;124meuclidean[39m[38;5;124m"[39m, contamination[38;5;241m=[39m[38;5;241m0.05[39m)  [38;5;66;03m# 5% data dianggap outlier[39;00m
+[0;32m----> 3[0m [43mknn_model[49m[38;5;241;43m.[39;49m[43mfit[49m[43m([49m[43mX_scaled[49m[43m)[49m
+[1;32m      5[0m [38;5;66;03m# Prediksi outlier (1 = outlier, 0 = normal)[39;00m
+[1;32m      6[0m outlier_predictions [38;5;241m=[39m knn_model[38;5;241m.[39mpredict(X_scaled)
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.16/x64/lib/python3.10/site-packages/pyod/models/knn.py:213[0m, in [0;36mKNN.fit[0;34m(self, X, y)[0m
+[1;32m    209[0m dist_arr, _ [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mneigh_[38;5;241m.[39mkneighbors(n_neighbors[38;5;241m=[39m[38;5;28mself[39m[38;5;241m.[39mn_neighbors,
+[1;32m    210[0m                                      return_distance[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m    211[0m dist [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_get_dist_by_method(dist_arr)
+[0;32m--> 213[0m [38;5;28mself[39m[38;5;241m.[39mdecision_scores_ [38;5;241m=[39m [43mdist[49m[38;5;241;43m.[39;49m[43mravel[49m()
+[1;32m    214[0m [38;5;28mself[39m[38;5;241m.[39m_process_decision_scores()
+[1;32m    216[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m
+
+[0;31mAttributeError[0m: 'NoneType' object has no attribute 'ravel'
+
