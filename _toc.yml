@@ -5,6 +5,6 @@ format: jb-book
 root: intro
 chapters:
 - file: TugasPertemuan1
-- file: TugasPertemuan2
-- file: TugasPertemuan3
+- file: TugasPertemuan2new
+- file: TugasPertemuan3new
 - file: TugasPertemuan4
