@@ -5,9 +5,10 @@ format: jb-book
 root: intro
 chapters:
 - file: TugasPertemuan1
-- file: TugasPertemuan2new
-- file: TugasPertemuan3new
-- file: TugasPertemuan4
-- file: TugasPertemuan5
+- file: Data-Understanding
+- file: Konsep-dasar-KNN
+- file: Konsep-dasar-LOF
+- file: Naive-Bayes
 - file: UTS-PenambanganData
-- file: kmenas
+- file: K-Means
+- file: Fuzzy-C-Means-Clustering
