@@ -12,3 +12,4 @@ chapters:
 - file: UTS-PenambanganData
 - file: K-Means
 - file: Fuzzy-C-Means-Clustering
+- file: Decision-Tree
