@@ -13,3 +13,4 @@ chapters:
 - file: K-Means
 - file: Fuzzy-C-Means-Clustering
 - file: Decision-Tree
+- file: Perbandingan model Klasifikasi Naive Bayes dan Decision Tree
