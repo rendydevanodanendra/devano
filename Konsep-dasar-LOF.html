@@ -1,0 +1,3737 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Konsep dasar LOF &#8212; Rendy Devano Danendra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Konsep-dasar-LOF';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Naive Bayes" href="Naive-Bayes.html" />
+    <link rel="prev" title="Macam-macam tipe data dan Konsep dasar KNN" href="Konsep-dasar-KNN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/data.png" class="logo__image only-light" alt="Rendy Devano Danendra - Home"/>
+    <script>document.write(`<img src="_static/data.png" class="logo__image only-dark" alt="Rendy Devano Danendra - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang di dokumentasi Matakuliah Data Mining
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="TugasPertemuan1.html"><strong>Konsep Dasar Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data-Understanding.html"><strong>Data Understanding dalam Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-KNN.html"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Konsep dasar LOF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Naive-Bayes.html"><strong>Naive Bayes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS-PenambanganData.html">UTS</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="K-Means.html"><strong>kmean-clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Fuzzy-C-Means-Clustering.html"><strong>Fuzzy C-Means Clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree Classifier</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Perbandingan%20model%20Klasifikasi%20Naive%20Bayes%20dan%20Decision%20Tree.html">Perbandingan model Klasifikasi Naive Bayes dan Decision Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PRA-UAS.html">Klasifikasi Kualitas Wine Menggunakan Teknik Data Mining</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD/issues/new?title=Issue%20on%20page%20%2FKonsep-dasar-LOF.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Konsep-dasar-LOF.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Konsep dasar LOF</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>1.Introduction</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-distance-and-k-neighbors"><strong>2.K-Distance and K-Neighbors</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reachability-density-rd"><strong>3.Reachability Density(RD)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-komponen"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-reachability-distance-lrd"><strong>4.Local Reachability Distance(LRD)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-outlier-factor-lof"><strong>5.Local Outlier Factor(LOF)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example"><strong>6.Example</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-lof"><strong>7.Advantages of LOF</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-lof"><strong>8.Disadvantages of LOF</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>9.Conclusion</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference"><strong>10.Reference</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitunganm-menggunakan-library-sklearn-dan-membandingkan-hasil-dari-excel"><strong>Contoh perhitunganm menggunakan library sklearn dan membandingkan hasil dari excel</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-perhitungan-jarak-euclidean-berdasarkan-gambar-yang-kamu-berikan">tabel perhitungan <strong>jarak Euclidean</strong> berdasarkan gambar yang kamu berikan:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-reachability-distance-k-3">Tabel <strong>Reachability Distance (K = 3)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-menghitung-lrd">tabel <strong>Menghitung LRD</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-lof">Tabel <strong>LOF</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kode"><strong>Penjelasan Kode</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-buat-data"><strong>1. Import Library dan Buat Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-model-lof"><strong>2. Inisialisasi Model LOF</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mendeteksi-outlier"><strong>3. Mendeteksi Outlier</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skor-anomali-lof-score"><strong>4. Skor Anomali (LOF Score)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-label-outlier"><strong>5. Menampilkan Label Outlier</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-yang-mungkin"><strong>Hasil yang Mungkin</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifikasi-yang-bisa-dicoba"><strong>Modifikasi yang Bisa Dicoba</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-hasil-perbandingan-antara-perhitungan-menggunakan-kode-dan-hasil-dari-excel-manual-dapat-disimpulkan-bahwa">Dari hasil perbandingan antara <strong>perhitungan menggunakan kode</strong> dan <strong>hasil dari Excel/Manual</strong>, dapat disimpulkan bahwa:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="konsep-dasar-lof">
+<h1><strong>Konsep dasar LOF</strong><a class="headerlink" href="#konsep-dasar-lof" title="Link to this heading">#</a></h1>
+<p>Membuat materi LOF dengan contoh manual dengan k=3 dan data sebanyak 10 dengan<br />
+2 fitur di web statis dan dibandingkan hasilnya dengan pakek library sylearn</p>
+<section id="introduction">
+<h2><strong>1.Introduction</strong><a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Outlier adalah titik data yang berbeda atau jauh dari titik data lainnya.
+Pertanyaan yang muncul di sini adalah apakah kita dapat mengidentifikasi outlier yang ada dalam data?</p>
+<p>Faktor outlier lokal (LOF) adalah algoritma yang mengidentifikasi outlier yang ada dalam kumpulan data. Namun, apa arti outlier lokal?</p>
+<p>Ketika suatu titik dianggap sebagai outlier berdasarkan lingkungan lokalnya, maka itu adalah outlier lokal. LOF akan mengidentifikasi outlier dengan mempertimbangkan kepadatan lingkungan tersebut. LOF bekerja dengan baik ketika kepadatan data tidak sama di seluruh kumpulan data.</p>
+<p>Untuk memahami LOF, kita harus mempelajari beberapa konsep secara berurutan:</p>
+<p><strong>K-distance and K-neighbors</strong><br />
+<strong>Reachability distance (RD)</strong><br />
+<strong>Local reachability density (LRD)</strong><br />
+<strong>Local Outlier Factor (LOF)</strong></p>
+</section>
+<section id="k-distance-and-k-neighbors">
+<h2><strong>2.K-Distance and K-Neighbors</strong><a class="headerlink" href="#k-distance-and-k-neighbors" title="Link to this heading">#</a></h2>
+<p>Jarak K adalah jarak antara titik dan tetangga terdekatnya, Kᵗʰ. Tetangga K yang dilambangkan dengan Nₖ(A) mencakup sekumpulan titik yang terletak di dalam atau pada lingkaran dengan radius jarak K. Tetangga K dapat lebih besar atau sama dengan nilai K. Bagaimana ini mungkin?</p>
+<p>Kita akan melihat contohnya. Katakanlah kita memiliki empat titik A, B, C, dan D (ditunjukkan di bawah).</p>
+<p><img alt="image.png" src="_images/ex2.png" /></p>
+<p>Jarak K dari A dengan K=2
+Jika K=2, maka K-tetangga dari A adalah C, B, dan D. Di sini, nilai K=2 tetapi ||N₂(A)|| = 3. Oleh karena itu, ||Nₖ(titik)|| akan selalu lebih besar atau sama dengan K</p>
+</section>
+<section id="reachability-density-rd">
+<h2><strong>3.Reachability Density(RD)</strong><a class="headerlink" href="#reachability-density-rd" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[RD(X_i, X_j) = \max(K\text{-distance}(X_j), \text{distance}(X_i, X_j))\]</div>
+</section>
+<section id="penjelasan-komponen">
+<h2><strong>Penjelasan Komponen:</strong><a class="headerlink" href="#penjelasan-komponen" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(RD(X_i, X_j)\)</span></p>
+<ul class="simple">
+<li><p>Reachability Distance antara titik <span class="math notranslate nohighlight">\(X_i\)</span> dan <span class="math notranslate nohighlight">\(X_j\)</span>.</p></li>
+<li><p>Ini menunjukkan seberapa “jauh” titik <span class="math notranslate nohighlight">\(X_i\)</span> dari <span class="math notranslate nohighlight">\(X_j\)</span> dengan mempertimbangkan kepadatan sekitar.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(K\text{-distance}(X_j)\)</span></p>
+<ul class="simple">
+<li><p>Jarak dari <span class="math notranslate nohighlight">\(X_j\)</span> ke tetangga ke-(k) terdekatnya (disebut juga <strong>k-distance</strong>).</p></li>
+<li><p>Ini menentukan batasan kepadatan lokal di sekitar titik <span class="math notranslate nohighlight">\(X_j\)</span>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\text{distance}(X_i, X_j)\)</span></p>
+<ul class="simple">
+<li><p>Jarak Euclidean antara <span class="math notranslate nohighlight">\(X_i\)</span> dan <span class="math notranslate nohighlight">\(X_j\)</span>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\max(K\text{-distance}(X_j), \text{distance}(X_i, X_j))\)</span></p>
+<ul class="simple">
+<li><p><strong>Jika ( X_i ) sangat dekat dengan ( X_j ), tetapi ( X_j ) memiliki tetangga yang lebih jauh</strong>, maka nilai reachability distance akan ditentukan oleh <strong>k-distance dari ( X_j )</strong>.</p></li>
+<li><p><strong>Jika ( X_i ) jauh dari ( X_j )</strong>, maka nilai <strong>distance(X_i, X_j)</strong> yang digunakan.</p></li>
+</ul>
+</li>
+</ol>
+<p>Didefinisikan sebagai jarak K maksimum dari Xj dan jarak antara Xi dan Xj.<br />
+Ukuran jarak bersifat khusus untuk masalah (Euclidean, Manhattan, dll.)</p>
+<p><img alt="image.png" src="_images/ilustrasiRD.png" /></p>
+<p>Ilustrasi jarak jangkauan dengan K=2
+Secara awam, jika titik Xi terletak di dalam K-tetangga Xj,
+jarak jangkauan akan menjadi jarak K dari Xj (garis biru),<br />
+jika tidak, jarak jangkauan akan menjadi jarak antara Xi dan Xj (garis oranye).</p>
+</section>
+<section id="local-reachability-distance-lrd">
+<h2><strong>4.Local Reachability Distance(LRD)</strong><a class="headerlink" href="#local-reachability-distance-lrd" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[LRD_k(A) = \frac{1}{\sum_{X_j \in N_k(A)} \frac{RD(A, X_j)}{|N_k(A)|}}\]</div>
+</section>
+<section id="id1">
+<h2><strong>Penjelasan Komponen:</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(LRD_k(A)\)</span></p>
+<ul class="simple">
+<li><p>Ini adalah <strong>Local Reachability Density</strong> untuk titik <strong>A</strong> dengan parameter <strong>k</strong> (jumlah tetangga terdekat).</p></li>
+<li><p>LRD digunakan untuk mengukur kepadatan lokal suatu titik dibandingkan dengan tetangganya.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(N_k(A) \)</span></p>
+<ul class="simple">
+<li><p>Ini adalah himpunan <strong>k-nearest neighbors</strong> (tetangga terdekat) dari titik <strong>A</strong>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(RD(A, X_j)\)</span></p>
+<ul class="simple">
+<li><p><strong>Reachability Distance</strong> antara titik <strong>A</strong> dan tetangga <strong>(X_j)</strong>.</p></li>
+<li><p>Dirumuskan sebagai:
+[
+RD(A, X_j) = \max(\text{MinPts_Dist}(X_j), d(A, X_j))
+]</p>
+<ul>
+<li><p><strong>MinPts_Dist((X_j))</strong> = jarak ke tetangga ke-(k) dari <strong>(X_j)</strong>.</p></li>
+<li><p><strong>(d(A, X_j))</strong> = jarak Euclidean antara <strong>(A)</strong> dan <strong>(X_j)</strong>.</p></li>
+<li><p>Ini bertujuan untuk menghindari outlier yang terlalu dekat dengan satu titik lainnya.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(|N_k(A)|\)</span></p>
+<ul class="simple">
+<li><p>Jumlah tetangga dari <strong>A</strong> yang dihitung (biasanya <strong>k</strong>).</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(sum_{X_j \in N_k(A)} \frac{RD(A, X_j)}{|N_k(A)|}\)</span></p>
+<ul class="simple">
+<li><p>Ini adalah rata-rata dari <strong>reachability distance</strong> untuk semua tetangga dari <strong>A</strong>.</p></li>
+<li><p>Semakin kecil hasilnya, semakin padat lingkungan sekitar titik <strong>A</strong>.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="local-outlier-factor-lof">
+<h2><strong>5.Local Outlier Factor(LOF)</strong><a class="headerlink" href="#local-outlier-factor-lof" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[LOF_k(A) = \frac{\sum_{X_j \in N_k(A)} LRD_k(X_j)}{||N_k(A)||} \times \frac{1}{LRD_k(A)}\]</div>
+<p>Ini adalah rumus <strong>Local Outlier Factor (LOF)</strong>, yang digunakan untuk mengidentifikasi outlier berdasarkan kepadatan lokal:</p>
+</section>
+<section id="id2">
+<h2><strong>Penjelasan Komponen:</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(LOF_k(A)\)</span></p>
+<ul class="simple">
+<li><p>Local Outlier Factor dari titik <strong>( A )</strong>.</p></li>
+<li><p>Jika nilai ini jauh lebih besar dari <strong>1</strong>, maka <strong>( A )</strong> kemungkinan besar adalah <strong>outlier</strong>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(N_k(A)\)</span></p>
+<ul class="simple">
+<li><p>Sekumpulan <strong>tetangga</strong> dari titik <strong>( A )</strong> dalam radius tertentu berdasarkan <strong>k-distance</strong>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(||N_k(A)||\)</span></p>
+<ul class="simple">
+<li><p>Jumlah tetangga dalam <span class="math notranslate nohighlight">\(N_k(A)\)</span>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(LRD_k(A)\)</span></p>
+<ul class="simple">
+<li><p><strong>Local Reachability Density (LRD)</strong> dari titik <strong>( A )</strong>.</p></li>
+<li><p>Ini adalah ukuran kepadatan lokal di sekitar titik <strong>( A )</strong>.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(LRD_k(X_j)\)</span> untuk  <span class="math notranslate nohighlight">\(X_j\)</span> in <span class="math notranslate nohighlight">\(N_k(A)\)</span></p>
+<ul class="simple">
+<li><p><strong>LRD dari setiap titik tetangga ( X_j ) dari ( A )</strong>.</p></li>
+</ul>
+</li>
+</ol>
+<p>LRD setiap titik digunakan untuk membandingkan dengan LRD rata-rata dari K tetangganya. LOF adalah rasio LRD rata-rata dari K tetangga A terhadap LRD A.</p>
+<p>Secara intuitif, jika titik tersebut bukan outlier (inlier), rasio LRD rata-rata tetangga kira-kira sama dengan LRD suatu titik (karena kerapatan titik dan tetangganya kira-kira sama). Dalam hal itu, LOF hampir sama dengan 1. Di sisi lain, jika titik tersebut merupakan outlier, LRD suatu titik lebih kecil dari LRD rata-rata tetangganya.<br />
+Maka nilai LOF akan tinggi.</p>
+<p>Secara umum, jika LOF &gt; 1, maka dianggap sebagai outlier, tetapi itu tidak selalu benar. Katakanlah kita tahu bahwa kita hanya memiliki satu outlier dalam data, maka kita ambil nilai LOF maksimum di antara semua nilai LOF, dan titik yang sesuai dengan nilai LOF maksimum akan dianggap sebagai outlier.</p>
+</section>
+<section id="example">
+<h2><strong>6.Example</strong><a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>4 titik: A(0,0), B(1,0), C(1,1) dan D(0,3) dan K=2. Kita akan menggunakan LOF untuk mendeteksi satu outlier di antara 4 titik ini.</p>
+<p><img alt="image.png" src="_images/poto.png" /></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Titik</p></th>
+<th class="head"><p>Tetangga Terdekat ke-2</p></th>
+<th class="head"><p>Jarak-K</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>C</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>A, C</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>A</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>A, C</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id3">
+<h2><a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Manhattan Distance</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Manhattan_Distance(A, B)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manhattan_Distance(A, C)</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>Manhattan_Distance(A, D)</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manhattan_Distance(B, C)</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>Manhattan_Distance(B, D)</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>Manhattan_Distance(C, D)</p></td>
+<td><p>3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>K-neighborhood (A) = {B,C} , ||N2(A)|| =2<br />
+K-neighborhood (B) = {A,C}, ||N2(B)|| =2<br />
+K-neighborhood (C)= {B,A}, ||N2(C)|| =2<br />
+K-neighborhood (D) = {A,C}, ||N2(D)|| =2</p>
+<p>K-distance, jarak antara setiap pasangan titik, dan K-neighborhood akan digunakan untuk menghitung LRD.</p>
+<div class="math notranslate nohighlight">
+\[
+LRD_2(A) = \frac{1}{\frac{RD(A,B) + RD(A,C)}{||N_2(A)||}} = \frac{1}{\frac{1+2}{2}} = 0.667
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LRD_2(B) = \frac{1}{\frac{RD(B,A) + RD(B,C)}{||N_2(B)||}} = \frac{1}{\frac{2+2}{2}} = 0.50
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LRD_2(C) = \frac{1}{\frac{RD(C,B) + RD(C,A)}{||N_2(C)||}} = \frac{1}{\frac{1+2}{2}} = 0.667
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LRD_2(D) = \frac{1}{\frac{RD(D,A) + RD(D,C)}{||N_2(D)||}} = \frac{1}{\frac{3+3}{2}} = 0.337
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">LRD</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">point</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">and</span> <span class="pre">D</span></code></p>
+<p>Kepadatan keterjangkauan lokal (LRD) akan digunakan untuk menghitung Faktor Outlier Lokal (LOF).</p>
+<div class="math notranslate nohighlight">
+\[
+LOF_2(A) = \frac{LRD_2(B) + LRD_2(C)}{||N_2(A)||} \times \frac{1}{LRD_2(A)}
+= \frac{0.5 + 0.667}{2} \times \frac{1}{0.667} = 0.87
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LOF_2(B) = \frac{LRD_2(A) + LRD_2(C)}{||N_2(B)||} \times \frac{1}{LRD_2(B)}
+= \frac{0.667 + 0.667}{2} \times \frac{1}{0.5} = 1.334
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LOF_2(C) = \frac{LRD_2(B) + LRD_2(A)}{||N_2(C)||} \times \frac{1}{LRD_2(C)}
+= \frac{0.5 + 0.667}{2} \times \frac{1}{0.667} = 0.87
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+LOF_2(D) = \frac{LRD_2(A) + LRD_2(C)}{||N_2(D)||} \times \frac{1}{LRD_2(D)}
+= \frac{0.667 + 0.667}{2} \times \frac{1}{0.337} = 2
+\]</div>
+<p><code class="docutils literal notranslate"><span class="pre">LOF</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">point</span> <span class="pre">A,</span> <span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">and</span> <span class="pre">D</span></code></p>
+<p>LOF tertinggi di antara keempat poin tersebut adalah LOF(D). Oleh karena itu, D merupakan outlier.</p>
+</section>
+<section id="advantages-of-lof">
+<h2><strong>7.Advantages of LOF</strong><a class="headerlink" href="#advantages-of-lof" title="Link to this heading">#</a></h2>
+<p>Suatu titik akan dianggap sebagai outlier jika berada pada jarak yang dekat dengan klaster yang sangat padat. Pendekatan global mungkin tidak menganggap titik tersebut sebagai outlier. Namun, LOF dapat mengidentifikasi outlier lokal secara efektif.</p>
+</section>
+<section id="disadvantages-of-lof">
+<h2><strong>8.Disadvantages of LOF</strong><a class="headerlink" href="#disadvantages-of-lof" title="Link to this heading">#</a></h2>
+<p>Karena LOF adalah rasio, maka sulit untuk menafsirkannya. Tidak ada nilai ambang batas tertentu yang jika di atasnya suatu titik ditetapkan sebagai outlier. Identifikasi outlier bergantung pada masalah dan pengguna.</p>
+</section>
+<section id="conclusion">
+<h2><strong>9.Conclusion</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Nilai faktor outlier lokal (LOF) mengidentifikasi outlier berdasarkan lingkungan lokal. Nilai ini memberikan hasil yang lebih baik daripada pendekatan global untuk menemukan outlier. Karena tidak ada nilai ambang batas LOF, pemilihan titik sebagai outlier bergantung pada pengguna.</p>
+</section>
+<section id="reference">
+<h2><strong>10.Reference</strong><a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
+<p>Breunig, M. M., Kriegel, H. P., Ng, R. T., and Sander, J. (2000). LOF: identifying density-based local outliers. In ACM sigmod record (Vol. 29, №2, pp. 93–104). ACM</p>
+</section>
+<section id="contoh-perhitunganm-menggunakan-library-sklearn-dan-membandingkan-hasil-dari-excel">
+<h2><strong>Contoh perhitunganm menggunakan library sklearn dan membandingkan hasil dari excel</strong><a class="headerlink" href="#contoh-perhitunganm-menggunakan-library-sklearn-dan-membandingkan-hasil-dari-excel" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data</p></th>
+<th class="head"><p>x</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>6</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>3</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>14</p></td>
+<td><p>18</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="tabel-perhitungan-jarak-euclidean-berdasarkan-gambar-yang-kamu-berikan">
+<h3>tabel perhitungan <strong>jarak Euclidean</strong> berdasarkan gambar yang kamu berikan:<a class="headerlink" href="#tabel-perhitungan-jarak-euclidean-berdasarkan-gambar-yang-kamu-berikan" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Titik</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>9</p></th>
+<th class="head"><p>10</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p>2</p></td>
+<td><p>4.243</p></td>
+<td><p>4</p></td>
+<td><p>2.236</p></td>
+<td><p>1</p></td>
+<td><p>17.029</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2.236</p></td>
+<td><p>-</p></td>
+<td><p>4.472</p></td>
+<td><p>3.162</p></td>
+<td><p>4.123</p></td>
+<td><p>5.385</p></td>
+<td><p>3.606</p></td>
+<td><p>1.414</p></td>
+<td><p>1.414</p></td>
+<td><p>14.866</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2.236</p></td>
+<td><p>4.472</p></td>
+<td><p>-</p></td>
+<td><p>3.162</p></td>
+<td><p>1</p></td>
+<td><p>4.123</p></td>
+<td><p>5.385</p></td>
+<td><p>4.243</p></td>
+<td><p>3.162</p></td>
+<td><p>19.209</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2.236</p></td>
+<td><p>3.162</p></td>
+<td><p>3.162</p></td>
+<td><p>-</p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p>2</p></td>
+<td><p>2.828</p></td>
+<td><p>16.643</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>4.123</p></td>
+<td><p>1</p></td>
+<td><p>2.236</p></td>
+<td><p>-</p></td>
+<td><p>3.162</p></td>
+<td><p>4.472</p></td>
+<td><p>3.606</p></td>
+<td><p>3</p></td>
+<td><p>18.601</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>4.243</p></td>
+<td><p>5.385</p></td>
+<td><p>4.123</p></td>
+<td><p>2.236</p></td>
+<td><p>3.162</p></td>
+<td><p>-</p></td>
+<td><p>3.162</p></td>
+<td><p>4.123</p></td>
+<td><p>5</p></td>
+<td><p>17.889</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>3.606</p></td>
+<td><p>5.385</p></td>
+<td><p>2.236</p></td>
+<td><p>4.472</p></td>
+<td><p>3.162</p></td>
+<td><p>-</p></td>
+<td><p>2.236</p></td>
+<td><p>4.123</p></td>
+<td><p>14.765</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>2.236</p></td>
+<td><p>1.414</p></td>
+<td><p>4.243</p></td>
+<td><p>2</p></td>
+<td><p>3.606</p></td>
+<td><p>4.123</p></td>
+<td><p>2.236</p></td>
+<td><p>-</p></td>
+<td><p>2</p></td>
+<td><p>15</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>1.414</p></td>
+<td><p>3.162</p></td>
+<td><p>2.828</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>4.123</p></td>
+<td><p>2</p></td>
+<td><p>-</p></td>
+<td><p>16.279</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>17.029</p></td>
+<td><p>14.866</p></td>
+<td><p>19.209</p></td>
+<td><p>16.643</p></td>
+<td><p>18.601</p></td>
+<td><p>17.889</p></td>
+<td><p>14.765</p></td>
+<td><p>15</p></td>
+<td><p>16.279</p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tabel-reachability-distance-k-3">
+<h3>Tabel <strong>Reachability Distance (K = 3)</strong><a class="headerlink" href="#tabel-reachability-distance-k-3" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Titik</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+<th class="head"><p>4</p></th>
+<th class="head"><p>5</p></th>
+<th class="head"><p>6</p></th>
+<th class="head"><p>7</p></th>
+<th class="head"><p>8</p></th>
+<th class="head"><p>9</p></th>
+<th class="head"><p>10</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>3.162</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p>3.162</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p>3.162</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p>3.162</p></td>
+<td><p></p></td>
+<td><p>3.162</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p>3.162</p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>2.236</p></td>
+<td><p>2.236</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p></p></td>
+<td><p>14.866</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>14.764</p></td>
+<td><p>15</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tabel-menghitung-lrd">
+<h3>tabel <strong>Menghitung LRD</strong><a class="headerlink" href="#tabel-menghitung-lrd" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Titik</p></th>
+<th class="head"><p>LRD</p></th>
+<th class="head"><p>3 Tetangga Terdekat</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LRD(1)</p></td>
+<td><p>0.463525492</p></td>
+<td><p>(9,5,8)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(2)</p></td>
+<td><p>0.48107237</p></td>
+<td><p>(8,9,1)</p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(3)</p></td>
+<td><p>0.392957488</p></td>
+<td><p>(5,1,4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(4)</p></td>
+<td><p>0.405496059</p></td>
+<td><p>(8,5,7)</p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(5)</p></td>
+<td><p>0.392957488</p></td>
+<td><p>(3,1,4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(6)</p></td>
+<td><p>0.350441772</p></td>
+<td><p>(4,5,7)</p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(7)</p></td>
+<td><p>0.392957488</p></td>
+<td><p>(4,8,6)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(8)</p></td>
+<td><p>0.463525492</p></td>
+<td><p>(3,4,9)</p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(9)</p></td>
+<td><p>0.463525492</p></td>
+<td><p>(1,2,8)</p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(10)</p></td>
+<td><p>0.067218016</p></td>
+<td><p>(7,2,8)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="tabel-lof">
+<h3>Tabel <strong>LOF</strong><a class="headerlink" href="#tabel-lof" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(
+\begin{array}{|c|c|}
+    \hline
+    \textbf{Titik} &amp; \textbf{LOF} \\
+    \hline
+    1 &amp; 0.9493 \\\hline
+    2 &amp; 0.9635 \\\hline
+    3 &amp; 1.0705 \\\hline
+    4 &amp; 1.0271 \\\hline
+    5 &amp; 1.0374 \\\hline
+    6 &amp; 1.1332 \\\hline
+    7 &amp; 1.0344 \\\hline
+    8 &amp; 0.9075 \\\hline
+    9 &amp; 1.0126 \\\hline
+    10 &amp; 6.6329 \\
+    \hline
+\end{array}
+\)</span></p>
+</section>
+</section>
+<section id="penjelasan-kode">
+<h2><strong>Penjelasan Kode</strong><a class="headerlink" href="#penjelasan-kode" title="Link to this heading">#</a></h2>
+<section id="import-library-dan-buat-data">
+<h3><strong>1. Import Library dan Buat Data</strong><a class="headerlink" href="#import-library-dan-buat-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code> digunakan untuk mendeteksi outlier berdasarkan kepadatan lokal suatu titik.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> digunakan untuk membuat array data.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> adalah array <strong>(10x2)</strong>, yang terdiri dari <strong>10 titik data</strong> dalam <strong>dua dimensi (x, y)</strong>.</p></li>
+<li><p>Titik <strong>(14,18)</strong> tampak jauh dari titik lainnya, kemungkinan besar ini adalah outlier.</p></li>
+</ul>
+</section>
+<section id="inisialisasi-model-lof">
+<h3><strong>2. Inisialisasi Model LOF</strong><a class="headerlink" href="#inisialisasi-model-lof" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors=3</span></code>: Setiap titik akan dibandingkan dengan <strong>3 tetangga terdekat</strong> untuk menghitung kepadatan lokal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contamination=0.1</span></code>: Model mengasumsikan bahwa <strong>10% data</strong> adalah outlier (dalam kasus ini, <strong>1 dari 10 titik</strong>).</p></li>
+</ul>
+</section>
+<section id="mendeteksi-outlier">
+<h3><strong>3. Mendeteksi Outlier</strong><a class="headerlink" href="#mendeteksi-outlier" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_predict(data)</span></code>: Melatih model dan mengembalikan <strong>label prediksi</strong> untuk setiap titik:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">1</span></code></strong> = inlier (normal)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-1</span></code></strong> = outlier (anomali)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="skor-anomali-lof-score">
+<h3><strong>4. Skor Anomali (LOF Score)</strong><a class="headerlink" href="#skor-anomali-lof-score" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_scores</span> <span class="o">=</span> <span class="o">-</span><span class="n">clf</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">negative_outlier_factor_</span></code>: Menunjukkan tingkat outlier suatu titik. Nilai lebih kecil berarti lebih anomali.</p></li>
+<li><p>Dikembalikan dalam bentuk <strong>negatif</strong>, sehingga dikalikan <code class="docutils literal notranslate"><span class="pre">-1</span></code> agar lebih mudah dibaca.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">X_scores</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Mencetak <strong>LOF score</strong> untuk setiap titik.</p></li>
+</ul>
+</section>
+<section id="menampilkan-label-outlier">
+<h3><strong>5. Menampilkan Label Outlier</strong><a class="headerlink" href="#menampilkan-label-outlier" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Menampilkan array dengan label <code class="docutils literal notranslate"><span class="pre">1</span></code> (normal) atau <code class="docutils literal notranslate"><span class="pre">-1</span></code> (outlier).</p></li>
+</ul>
+</section>
+</section>
+<section id="hasil-yang-mungkin">
+<h2><strong>Hasil yang Mungkin</strong><a class="headerlink" href="#hasil-yang-mungkin" title="Link to this heading">#</a></h2>
+<p>Misalkan output yang dihasilkan adalah:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.5</span>
+<span class="mf">1.7</span>
+<span class="mf">1.6</span>
+<span class="mf">1.8</span>
+<span class="mf">1.6</span>
+<span class="mf">1.9</span>
+<span class="mf">1.7</span>
+<span class="mf">1.8</span>
+<span class="mf">1.5</span>
+<span class="mf">5.4</span>  <span class="o">&lt;--</span> <span class="n">Nilai</span> <span class="n">tinggi</span> <span class="p">(</span><span class="n">outlier</span><span class="p">)</span>
+<span class="p">[</span> <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span>  <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Nilai LOF tertinggi</strong> ada pada titik <strong>(14,18)</strong>, karena jauh dari titik lainnya.</p></li>
+<li><p><strong>Prediksi label <code class="docutils literal notranslate"><span class="pre">-1</span></code></strong> menunjukkan bahwa titik terakhir adalah <strong>outlier</strong>.</p></li>
+</ul>
+</section>
+<section id="kesimpulan">
+<h2><strong>Kesimpulan</strong><a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>LOF membandingkan kepadatan lokal setiap titik dengan tetangganya.</p></li>
+<li><p>Jika titik memiliki kepadatan jauh lebih kecil dibandingkan tetangga terdekatnya, maka dianggap <strong>outlier</strong>.</p></li>
+<li><p>Pada dataset ini, titik <strong>(14,18)</strong> terdeteksi sebagai <strong>outlier</strong>, sesuai ekspektasi.</p></li>
+</ul>
+<section id="modifikasi-yang-bisa-dicoba">
+<h3><strong>Modifikasi yang Bisa Dicoba</strong><a class="headerlink" href="#modifikasi-yang-bisa-dicoba" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Ubah jumlah tetangga:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ini bisa mengubah hasil deteksi outlier.</p>
+</li>
+<li><p><strong>Visualisasi dengan Matplotlib:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deteksi Outlier dengan LOF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Ini akan menampilkan <strong>outlier dalam warna berbeda</strong>.</p>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pymysql pandas psycopg2 sqlalchemy seaborn numpy pandas scikit-learn pyod matplotlib seaborn python-dotenv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pymysql in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (1.1.1)
+Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.3.0)
+Requirement already satisfied: psycopg2 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.9.10)
+Requirement already satisfied: sqlalchemy in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.0.41)
+Requirement already satisfied: seaborn in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (0.13.2)
+Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.2.6)
+Requirement already satisfied: scikit-learn in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (1.7.0)
+Requirement already satisfied: pyod in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.0.5)
+Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (3.10.3)
+Requirement already satisfied: python-dotenv in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (1.1.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+Requirement already satisfied: greenlet&gt;=1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from sqlalchemy) (3.2.3)
+Requirement already satisfied: typing-extensions&gt;=4.6.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from sqlalchemy) (4.14.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.8.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from scikit-learn) (1.15.3)
+Requirement already satisfied: joblib&gt;=1.2.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from scikit-learn) (1.5.1)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from scikit-learn) (3.6.0)
+Requirement already satisfied: numba&gt;=0.51 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from pyod) (0.61.2)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (4.58.4)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (1.4.8)
+Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow&gt;=8 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (11.2.1)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (3.2.3)
+Requirement already satisfied: llvmlite&lt;0.45,&gt;=0.44.0dev0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from numba&gt;=0.51-&gt;pyod) (0.44.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">14</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="p">])</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># n_errors = (y_pred != ground_truth).sum()</span>
+<span class="n">X_scores</span> <span class="o">=</span> <span class="o">-</span><span class="n">clf</span><span class="o">.</span><span class="n">negative_outlier_factor_</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">X_scores</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0270880488169942
+0.9233171042905761
+1.0704966620322989
+0.907522212620221
+1.0704966620322989
+1.188443242610531
+1.083656453869045
+1.01261842015087
+0.9708879339047151
+6.632920900063053
+[ 1  1  1  1  1  1  1  1  1 -1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dari-hasil-perbandingan-antara-perhitungan-menggunakan-kode-dan-hasil-dari-excel-manual-dapat-disimpulkan-bahwa">
+<h3>Dari hasil perbandingan antara <strong>perhitungan menggunakan kode</strong> dan <strong>hasil dari Excel/Manual</strong>, dapat disimpulkan bahwa:<a class="headerlink" href="#dari-hasil-perbandingan-antara-perhitungan-menggunakan-kode-dan-hasil-dari-excel-manual-dapat-disimpulkan-bahwa" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>LOF(k) ≈ 1</strong> → Artinya titik tersebut memiliki kepadatan yang mirip dengan tetangganya, sehingga dianggap sebagai bagian dari kelompok (<strong>inlier</strong>).</p></li>
+<li><p><strong>LOF(k) &lt; 1</strong> → Artinya titik ini memiliki kepadatan lebih tinggi dibandingkan tetangganya, termasuk <strong>inlier</strong> karena berada di area yang lebih rapat.</p></li>
+<li><p><strong>LOF(k) &gt; 1</strong> → Artinya titik ini memiliki kepadatan lebih jarang dibandingkan dengan tetangganya. Semakin besar nilai LOF, semakin kuat indikasi bahwa titik tersebut adalah <strong>outlier</strong>.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p><strong>Nilai LOF dari kode dan Excel hampir sama</strong>, dengan selisih kecil yang mungkin disebabkan oleh perbedaan presisi dalam perhitungan.</p></li>
+<li><p><strong>Titik 10 tetap terdeteksi sebagai outlier</strong> di kedua metode, dengan nilai LOF yang jauh lebih besar dari 1.</p></li>
+<li><p><strong>Titik lainnya memiliki LOF yang mendekati 1</strong>, menunjukkan bahwa mereka termasuk dalam kelompok <strong>inlier</strong> di kedua hasil.</p></li>
+<li><p><strong>Perbedaan kecil dalam nilai LOF kemungkinan berasal dari perbedaan metode rounding atau floating-point precision</strong> dalam perhitungan di kode dan Excel.</p></li>
+</ol>
+<p>Kesimpulannya, baik hasil dari <strong>kode maupun Excel</strong> memberikan deteksi <strong>outlier yang konsisten</strong>, sehingga metode yang digunakan dapat dianggap valid.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>titik</p></th>
+<th class="head"><p>x1</p></th>
+<th class="head"><p>x2</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p>titik</p></th>
+<th class="head"><p>Column1</p></th>
+<th class="head"><p>Column3</p></th>
+<th class="head"><p>hasil2</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>d</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.2</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>10</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>5.6</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>6</p></td>
+<td><p>9</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.3</p></td>
+<td><p>5.830951895</p></td>
+<td><p></p></td>
+<td><p>2.414736403</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>5.6</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>8.6</p></td>
+<td><p>1.189207115</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>7</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.4</p></td>
+<td><p>7.211102551</p></td>
+<td><p></p></td>
+<td><p>2.685349614</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>9</p></td>
+<td><p>2.828427125</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>6.8</p></td>
+<td><p>1.189207115</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>5</p></td>
+<td><p>9</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.5</p></td>
+<td><p>5.385164807</p></td>
+<td><p></p></td>
+<td><p>2.320595787</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>6</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.6</p></td>
+<td><p>6.708203932</p></td>
+<td><p></p></td>
+<td><p>2.590020064</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K-Distance titik 6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.7</p></td>
+<td><p>4.472135955</p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>9</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>3.4</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>4</p></td>
+<td><p>8</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.8</p></td>
+<td><p>4.123105626</p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>3.4</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.9</p></td>
+<td><p>2.828427125</p></td>
+<td><p></p></td>
+<td><p>1.681792831</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>1.189207115</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1 dan 10</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil2</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.3</p></td>
+<td><p>3.605551275</p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p>3.4</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p>4.5</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p>5.6</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2.4</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>3.5</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>4.6</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>5.7</p></td>
+<td><p>3.605551275</p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.5</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p>3.6</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>4.7</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>5.8</p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2.6</p></td>
+<td><p>4.472135955</p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p>3.7</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p>4.8</p></td>
+<td><p>3.605551275</p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p>5.9</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p>1.732050808</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.7</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p>1.732050808</p></td>
+<td><p></p></td>
+<td><p>3.8</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p>4.9</p></td>
+<td><p>4.472135955</p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p>5 dan 10</p></td>
+<td><p>6.08276253</p></td>
+<td><p></p></td>
+<td><p>2.466325715</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2.8</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>3.9</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p>4 dan 10</p></td>
+<td><p>7.615773106</p></td>
+<td><p></p></td>
+<td><p>2.759669021</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.320595787</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.9</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>3 dan 10</p></td>
+<td><p>6.32455532</p></td>
+<td><p></p></td>
+<td><p>2.514866859</p></td>
+<td><p></p></td>
+<td><p>3,1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.685349614</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2 dan 10</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p>1.732050808</p></td>
+<td><p></p></td>
+<td><p>3,1</p></td>
+<td><p>5.830951895</p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p>3.2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p>3.2</p></td>
+<td><p>3.605551275</p></td>
+<td><p></p></td>
+<td><p>2.414736403</p></td>
+<td><p></p></td>
+<td><p>3.4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>Column3</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>Column1</p></td>
+<td><p>Column2</p></td>
+<td><p>hasil</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>6.7</p></td>
+<td><p>4.123105626</p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p>7.8</p></td>
+<td><p>3.605551275</p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p>8.9</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p>9 dan 10</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6.8</p></td>
+<td><p>2.828427125</p></td>
+<td><p></p></td>
+<td><p>1.681792831</p></td>
+<td><p></p></td>
+<td><p>7.9</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p>8 dan 10</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.681792831</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>6.9</p></td>
+<td><p>4.123105626</p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p>7 dan 10</p></td>
+<td><p>4.242640687</p></td>
+<td><p></p></td>
+<td><p>2.059767144</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6 dan 10</p></td>
+<td><p>7.280109889</p></td>
+<td><p></p></td>
+<td><p>2.698167876</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.590020064</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.732050808</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.114742527</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.77827941</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.732050808</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.681792831</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.414213562</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.189207115</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.030543185</p></td>
+<td><p></p></td>
+<td><p>7</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.898828922</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1.495348781</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>data</p></td>
+<td><p>x</p></td>
+<td><p>y</p></td>
+<td><p></p></td>
+<td><p>titik</p></td>
+<td><p>1</p></td>
+<td><p>Jarak</p></td>
+<td><p>2</p></td>
+<td><p>Jarak</p></td>
+<td><p>3</p></td>
+<td><p>Jarak</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>8</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>7</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>8</p></td>
+<td><p>1.414213562</p></td>
+<td><p>9</p></td>
+<td><p>1.414213562</p></td>
+<td><p>1</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+<td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>5</p></td>
+<td><p>2.236067977</p></td>
+<td><p>7</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p>5</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>6</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>6</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>5</p></td>
+<td><p>3.16227766</p></td>
+<td><p>7</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>7</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+<td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>6</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>1.414213562</p></td>
+<td><p>4</p></td>
+<td><p>2</p></td>
+<td><p>9</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>3</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+<td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>1.414213562</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>14</p></td>
+<td><p>18</p></td>
+<td><p></p></td>
+<td><p>10</p></td>
+<td><p>7</p></td>
+<td><p>14.76482306</p></td>
+<td><p>2</p></td>
+<td><p>14.86606875</p></td>
+<td><p>8</p></td>
+<td><p>15</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1. Menghitung jarak dengan Euclidean</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Titik</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p>4.242640687</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>1</p></td>
+<td><p>17.02938637</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.123105626</p></td>
+<td><p>5.385164807</p></td>
+<td><p>3.605551275</p></td>
+<td><p>1.414213562</p></td>
+<td><p>1.414213562</p></td>
+<td><p>14.86606875</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.472135955</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>1</p></td>
+<td><p>4.123105626</p></td>
+<td><p>5.385164807</p></td>
+<td><p>4.242640687</p></td>
+<td><p>3.16227766</p></td>
+<td><p>19.20937271</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p>2.828427125</p></td>
+<td><p>16.64331698</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>2</p></td>
+<td><p>4.123105626</p></td>
+<td><p>1</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.605551275</p></td>
+<td><p>3</p></td>
+<td><p>18.60107524</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>4.242640687</p></td>
+<td><p>5.385164807</p></td>
+<td><p>4.123105626</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.123105626</p></td>
+<td><p>5</p></td>
+<td><p>17.88854382</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>3.605551275</p></td>
+<td><p>5.385164807</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.123105626</p></td>
+<td><p>14.76482306</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>2.236067977</p></td>
+<td><p>1.414213562</p></td>
+<td><p>4.242640687</p></td>
+<td><p>2</p></td>
+<td><p>3.605551275</p></td>
+<td><p>4.123105626</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>15</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>1</p></td>
+<td><p>1.414213562</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.828427125</p></td>
+<td><p>3</p></td>
+<td><p>5</p></td>
+<td><p>4.123105626</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>16.2788206</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>17.02938637</p></td>
+<td><p>14.86606875</p></td>
+<td><p>19.20937271</p></td>
+<td><p>16.64331698</p></td>
+<td><p>18.60107524</p></td>
+<td><p>17.88854382</p></td>
+<td><p>14.76482306</p></td>
+<td><p>15</p></td>
+<td><p>16.2788206</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>2. Menghitung Reachability Distance</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>K =</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Titik</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.242640687</p></td>
+<td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p>17.02938637</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.123105626</p></td>
+<td><p>4.242640687</p></td>
+<td><p>3.605551275</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>15</p></td>
+<td><p></p></td>
+<td><p>k-distance(B) = jarak ke-3 tetangga terjauh dari B</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.472135955</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.123105626</p></td>
+<td><p>5.385164807</p></td>
+<td><p>4.242640687</p></td>
+<td><p>3.16227766</p></td>
+<td><p>19.20937271</p></td>
+<td><p></p></td>
+<td><p>d(A,B) = jarak euclidean antara A dan B</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2</p></td>
+<td><p>2.828427125</p></td>
+<td><p>16.64331698</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.123105626</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.605551275</p></td>
+<td><p>3</p></td>
+<td><p>18.60107524</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>4.242640687</p></td>
+<td><p>5.385164807</p></td>
+<td><p>4.123105626</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>3.16227766</p></td>
+<td><p>4.123105626</p></td>
+<td><p>5</p></td>
+<td><p>17.88854382</p></td>
+<td><p></p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>3.605551275</p></td>
+<td><p>5.385164807</p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.472135955</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>2.236067977</p></td>
+<td><p>4.123105626</p></td>
+<td><p>15</p></td>
+<td><p>RD(1)</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.605551275</p></td>
+<td><p>4.123105626</p></td>
+<td><p>3.16227766</p></td>
+<td><p></p></td>
+<td><p>2</p></td>
+<td><p>15</p></td>
+<td><p>RD(2)</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.828427125</p></td>
+<td><p>3</p></td>
+<td><p>17.88854382</p></td>
+<td><p>4.123105626</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p>16.2788206</p></td>
+<td><p>RD(3)</p></td>
+<td><p>3.16227766</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>17.02938637</p></td>
+<td><p>14.86606875</p></td>
+<td><p>19.20937271</p></td>
+<td><p>16.64331698</p></td>
+<td><p>18.60107524</p></td>
+<td><p>17.88854382</p></td>
+<td><p>14.76482306</p></td>
+<td><p>15</p></td>
+<td><p>16.2788206</p></td>
+<td><p></p></td>
+<td><p>RD(4)</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2.236067977</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>RD(5)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>3. Menghitung LRD</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(1) =</p></td>
+<td><p>0.463525492</p></td>
+<td><p>3 tetangga terdekat = (9,5,8)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(2) =</p></td>
+<td><p>0.48107237</p></td>
+<td><p>3 tetangga terdekat = (8,9,1)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(3) =</p></td>
+<td><p>0.392957488</p></td>
+<td><p>3 tetangga terdekat = (5,1,4)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(4)  =</p></td>
+<td><p>0.405496059</p></td>
+<td><p>3 tetangga terdekat = (8,5,7)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(5) =</p></td>
+<td><p>0.392957488</p></td>
+<td><p>3 tetangga terdekat = (3,1,4)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(6) =</p></td>
+<td><p>0.350441772</p></td>
+<td><p>3 tetangga terdekat = (4,5,7)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(7) =</p></td>
+<td><p>0.392957488</p></td>
+<td><p>3 tetangga terdekat = (4,8,6)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(8) =</p></td>
+<td><p>0.463525492</p></td>
+<td><p>3 tetangga terdekat = (3,4,9)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LRD(9) =</p></td>
+<td><p>0.463525492</p></td>
+<td><p>3 tetangga terdekat = (1, 2, 8)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LRD(10) =</p></td>
+<td><p>0.067218016</p></td>
+<td><p>3 tetangga terdekat = (7,2,8)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>4. Menghitung LOF</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LOF(1) =</p></td>
+<td><p>0.949252699</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LOF(2) =</p></td>
+<td><p>0.963525492</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LOF(3) =</p></td>
+<td><p>1.070496662</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LOF(4) =</p></td>
+<td><p>1.027088049</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LOF(5) =</p></td>
+<td><p>1.037395235</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LOF(6) =</p></td>
+<td><p>1.133246786</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LOF(7) =</p></td>
+<td><p>1.034431933</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LOF(8) =</p></td>
+<td><p>0.907522213</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LOF(9) =</p></td>
+<td><p>1.01261842</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LOF(10) =</p></td>
+<td><p>6.6329209</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Konsep-dasar-KNN.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Naive-Bayes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Naive Bayes</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction"><strong>1.Introduction</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-distance-and-k-neighbors"><strong>2.K-Distance and K-Neighbors</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reachability-density-rd"><strong>3.Reachability Density(RD)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-komponen"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-reachability-distance-lrd"><strong>4.Local Reachability Distance(LRD)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-outlier-factor-lof"><strong>5.Local Outlier Factor(LOF)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>Penjelasan Komponen:</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example"><strong>6.Example</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3"></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-lof"><strong>7.Advantages of LOF</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-lof"><strong>8.Disadvantages of LOF</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>9.Conclusion</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference"><strong>10.Reference</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitunganm-menggunakan-library-sklearn-dan-membandingkan-hasil-dari-excel"><strong>Contoh perhitunganm menggunakan library sklearn dan membandingkan hasil dari excel</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-perhitungan-jarak-euclidean-berdasarkan-gambar-yang-kamu-berikan">tabel perhitungan <strong>jarak Euclidean</strong> berdasarkan gambar yang kamu berikan:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-reachability-distance-k-3">Tabel <strong>Reachability Distance (K = 3)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-menghitung-lrd">tabel <strong>Menghitung LRD</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tabel-lof">Tabel <strong>LOF</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kode"><strong>Penjelasan Kode</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library-dan-buat-data"><strong>1. Import Library dan Buat Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inisialisasi-model-lof"><strong>2. Inisialisasi Model LOF</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mendeteksi-outlier"><strong>3. Mendeteksi Outlier</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skor-anomali-lof-score"><strong>4. Skor Anomali (LOF Score)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-label-outlier"><strong>5. Menampilkan Label Outlier</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-yang-mungkin"><strong>Hasil yang Mungkin</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modifikasi-yang-bisa-dicoba"><strong>Modifikasi yang Bisa Dicoba</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-hasil-perbandingan-antara-perhitungan-menggunakan-kode-dan-hasil-dari-excel-manual-dapat-disimpulkan-bahwa">Dari hasil perbandingan antara <strong>perhitungan menggunakan kode</strong> dan <strong>hasil dari Excel/Manual</strong>, dapat disimpulkan bahwa:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data Engineering wanna be
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

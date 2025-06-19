@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Konsep Dasar Data Mining &#8212; Rendy Devano Danendra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'TugasPertemuan1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Understanding dalam Data Mining" href="Data-Understanding.html" />
+    <link rel="prev" title="Selamat Datang di dokumentasi Matakuliah Data Mining" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/data.png" class="logo__image only-light" alt="Rendy Devano Danendra - Home"/>
+    <script>document.write(`<img src="_static/data.png" class="logo__image only-dark" alt="Rendy Devano Danendra - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang di dokumentasi Matakuliah Data Mining
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Konsep Dasar Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data-Understanding.html"><strong>Data Understanding dalam Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-KNN.html"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-LOF.html"><strong>Konsep dasar LOF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Naive-Bayes.html"><strong>Naive Bayes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS-PenambanganData.html">UTS</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="K-Means.html"><strong>kmean-clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Fuzzy-C-Means-Clustering.html"><strong>Fuzzy C-Means Clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree Classifier</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Perbandingan%20model%20Klasifikasi%20Naive%20Bayes%20dan%20Decision%20Tree.html">Perbandingan model Klasifikasi Naive Bayes dan Decision Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PRA-UAS.html">Klasifikasi Kualitas Wine Menggunakan Teknik Data Mining</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD/issues/new?title=Issue%20on%20page%20%2FTugasPertemuan1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/TugasPertemuan1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Konsep Dasar Data Mining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining"><strong>1.Pengertian Data Mining</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbedaan-data-mining-dengan-teknik-lain"><strong>1.1. Perbedaan Data Mining dengan Teknik Lain</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-data-dalam-data-mining"><strong>2. Jenis Data dalam Data Mining</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teknik-teknik-utama-dalam-data-mining"><strong>3️.Teknik-Teknik Utama dalam Data Mining</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-klasifikasi"><strong>3.1. Classification (Klasifikasi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-pengelompokan"><strong>3.2. Clustering (Pengelompokan)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#association-rule-learning-aturan-asosiasi"><strong>3.3. Association Rule Learning (Aturan Asosiasi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-regresi"><strong>3.4. Regression (Regresi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-detection-deteksi-anomali"><strong>3.5. Anomaly Detection (Deteksi Anomali)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm-model"><strong>4️.Proses Data Mining (CRISP-DM Model)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-dalam-crisp-dm"><strong>Tahapan dalam CRISP-DM</strong>:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="konsep-dasar-data-mining">
+<h1><strong>Konsep Dasar Data Mining</strong><a class="headerlink" href="#konsep-dasar-data-mining" title="Link to this heading">#</a></h1>
+<p>Data mining adalah proses menemukan pola atau informasi tersembunyi dalam dataset besar dengan menggunakan teknik statistik, pembelajaran mesin (<strong>machine learning</strong>), dan basis data.</p>
+<section id="pengertian-data-mining">
+<h2><strong>1.Pengertian Data Mining</strong><a class="headerlink" href="#pengertian-data-mining" title="Link to this heading">#</a></h2>
+<p>Data mining, yang juga dikenal sebagai Knowledge Discovery in Databases (KDD), merupakan teknik untuk mengekstrak informasi berguna dari data besar sehingga dapat digunakan untuk pengambilan keputusan. Proses ini melibatkan beberapa tahap untuk mengidentifikasi pola dan wawasan dari data yang ada.</p>
+<section id="perbedaan-data-mining-dengan-teknik-lain">
+<h3><strong>1.1. Perbedaan Data Mining dengan Teknik Lain</strong><a class="headerlink" href="#perbedaan-data-mining-dengan-teknik-lain" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Konsep</p></th>
+<th class="head"><p>Tujuan</p></th>
+<th class="head"><p>Contoh</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Database</strong></p></td>
+<td><p>Menyimpan dan mengelola data</p></td>
+<td><p>SQL Query untuk menampilkan data pelanggan</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Big Data</strong></p></td>
+<td><p>Menangani data dalam jumlah besar dan kompleks</p></td>
+<td><p>Hadoop untuk memproses jutaan transaksi dalam sehari</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Machine Learning</strong></p></td>
+<td><p>Mengajarkan komputer untuk belajar dari data</p></td>
+<td><p>Model AI yang memprediksi harga saham</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data Mining</strong></p></td>
+<td><p>Menemukan pola dan wawasan dari data</p></td>
+<td><p>Menemukan pola pembelian pelanggan di e-commerce</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="jenis-data-dalam-data-mining">
+<h2><strong>2. Jenis Data dalam Data Mining</strong><a class="headerlink" href="#jenis-data-dalam-data-mining" title="Link to this heading">#</a></h2>
+<p><strong>Data Terstruktur</strong><br />
+Data yang disimpan dalam tabel atau basis data (misalnya: MySQL, PostgreSQL).<br />
+Contoh: Data pelanggan (ID, nama, usia, pembelian terakhir).</p>
+<p><strong>Data Semi-Terstruktur</strong><br />
+Data yang tidak memiliki struktur yang kaku, namun masih dapat dikenali strukturnya (misalnya: XML, JSON).<br />
+Contoh: Log file, data dari API.</p>
+<p><strong>Data Tidak Terstruktur</strong><br />
+Data yang tidak memiliki format atau struktur yang tetap.<br />
+Contoh: Teks, gambar, video, atau rekaman suara.</p>
+</section>
+<section id="teknik-teknik-utama-dalam-data-mining">
+<h2><strong>3️.Teknik-Teknik Utama dalam Data Mining</strong><a class="headerlink" href="#teknik-teknik-utama-dalam-data-mining" title="Link to this heading">#</a></h2>
+<p>teknik utama dalam data mining beserta algoritma yang sering digunakan:</p>
+<section id="classification-klasifikasi">
+<h3><strong>3.1. Classification (Klasifikasi)</strong><a class="headerlink" href="#classification-klasifikasi" title="Link to this heading">#</a></h3>
+<p>Mengelompokkan data ke dalam kategori berdasarkan label yang telah diketahui.<br />
+<strong>Contoh</strong>:<br />
+<strong>Spam Detection</strong> Mengklasifikasikan email sebagai spam atau bukan spam.<br />
+<strong>Fraud Detection</strong> Memprediksi transaksi kartu kredit yang mencurigakan.<br />
+<strong>Algoritma Populer</strong>: <code class="docutils literal notranslate"><span class="pre">Decision</span> <span class="pre">Tree</span> <span class="pre">(C4.5,</span> <span class="pre">CART)</span></code>, <code class="docutils literal notranslate"><span class="pre">Naïve</span> <span class="pre">Bayes</span></code>, <code class="docutils literal notranslate"><span class="pre">Support</span> <span class="pre">Vector</span> <span class="pre">Machine</span> <span class="pre">(SVM)</span></code>, <code class="docutils literal notranslate"><span class="pre">Neural</span> <span class="pre">Network</span> <span class="pre">(Deep</span> <span class="pre">Learning)</span></code></p>
+</section>
+<section id="clustering-pengelompokan">
+<h3><strong>3.2. Clustering (Pengelompokan)</strong><a class="headerlink" href="#clustering-pengelompokan" title="Link to this heading">#</a></h3>
+<p>Mengelompokkan data yang tidak memiliki label berdasarkan kesamaan karakteristik.<br />
+<strong>Contoh</strong>:<br />
+<strong>Segmentasi Pelanggan</strong> Mengelompokkan pelanggan berdasarkan pola belanja.<br />
+<strong>Grouping Dokumen</strong> Mengelompokkan berita berdasarkan topik.<br />
+<strong>Algoritma Populer</strong>:  <code class="docutils literal notranslate"><span class="pre">K-Means</span> <span class="pre">Clustering</span></code>  <code class="docutils literal notranslate"><span class="pre">DBSCAN</span> <span class="pre">(Density-Based</span> <span class="pre">Spatial</span> <span class="pre">Clustering)</span></code>  <code class="docutils literal notranslate"><span class="pre">Hierarchical</span> <span class="pre">Clustering</span></code></p>
+</section>
+<section id="association-rule-learning-aturan-asosiasi">
+<h3><strong>3.3. Association Rule Learning (Aturan Asosiasi)</strong><a class="headerlink" href="#association-rule-learning-aturan-asosiasi" title="Link to this heading">#</a></h3>
+<p>Mencari hubungan atau pola yang sering muncul dalam dataset.<br />
+<strong>Contoh</strong>:<br />
+<strong>Market Basket Analysis</strong>: Jika seseorang membeli roti, kemungkinan besar ia juga akan membeli selai.<br />
+<strong>Algoritma Populer</strong>:  <code class="docutils literal notranslate"><span class="pre">Apriori</span> <span class="pre">Algorithm</span></code>  <code class="docutils literal notranslate"><span class="pre">FP-Growth</span> <span class="pre">Algorithm</span></code></p>
+</section>
+<section id="regression-regresi">
+<h3><strong>3.4. Regression (Regresi)</strong><a class="headerlink" href="#regression-regresi" title="Link to this heading">#</a></h3>
+<p>Memprediksi nilai kontinu berdasarkan hubungan antar variabel.<br />
+<strong>Contoh</strong>:<br />
+Prediksi harga rumah berdasarkan ukuran dan lokasi.<br />
+Estimasi pendapatan seseorang berdasarkan tingkat pendidikan.<br />
+<strong>Algoritma Populer</strong>:<code class="docutils literal notranslate"><span class="pre">Linear</span> <span class="pre">Regression``Polynomial</span> <span class="pre">Regression``Random</span> <span class="pre">Forest</span> <span class="pre">Regression</span> </code></p>
+</section>
+<section id="anomaly-detection-deteksi-anomali">
+<h3><strong>3.5. Anomaly Detection (Deteksi Anomali)</strong><a class="headerlink" href="#anomaly-detection-deteksi-anomali" title="Link to this heading">#</a></h3>
+<p>Mendeteksi data yang menyimpang dari pola normal.<br />
+<strong>Contoh</strong>:<br />
+Mendeteksi transaksi kartu kredit palsu.
+Menemukan kesalahan sensor dalam sistem IoT.<br />
+<strong>Algoritma Populer</strong>:  <code class="docutils literal notranslate"><span class="pre">Isolation</span> <span class="pre">Forest</span></code> <code class="docutils literal notranslate"><span class="pre">**Local</span> <span class="pre">Outlier</span> <span class="pre">Factor</span> <span class="pre">(LOF)**</span></code> <code class="docutils literal notranslate"><span class="pre">**One-Class</span> <span class="pre">SVM**</span></code></p>
+</section>
+</section>
+<section id="proses-data-mining-crisp-dm-model">
+<h2><strong>4️.Proses Data Mining (CRISP-DM Model)</strong><a class="headerlink" href="#proses-data-mining-crisp-dm-model" title="Link to this heading">#</a></h2>
+<p>Model <strong>CRISP-DM (Cross-Industry Standard Process for Data Mining)</strong> adalah framework standar untuk melakukan data mining.</p>
+<section id="tahapan-dalam-crisp-dm">
+<h3><strong>Tahapan dalam CRISP-DM</strong>:<a class="headerlink" href="#tahapan-dalam-crisp-dm" title="Link to this heading">#</a></h3>
+<p><strong>1.Business Understanding</strong><br />
+Memahami tujuan bisnis dan masalah yang ingin diselesaikan.<br />
+Contoh: <strong>Menentukan apakah pelanggan akan berhenti berlangganan layanan.</strong></p>
+<p><strong>2.Data Understanding</strong><br />
+Mengumpulkan dan mengeksplorasi dataset.<br />
+Contoh: <strong>Menganalisis pola pembelian pelanggan dalam e-commerce.</strong></p>
+<p><strong>3.Data Preparation</strong><br />
+Membersihkan data dari nilai yang hilang, duplikasi, dan anomali.<br />
+Contoh: <strong>Menghapus data yang tidak lengkap atau menangani missing values.</strong></p>
+<p><strong>4.Modeling</strong><br />
+Memilih dan menerapkan algoritma data mining yang sesuai.<br />
+Contoh: <strong>Menggunakan Decision Tree untuk klasifikasi pelanggan.</strong></p>
+<p><strong>5.Evaluation</strong><br />
+Mengukur kinerja model dengan metrik seperti akurasi, precision, recall.<br />
+Contoh: <strong>Menilai apakah model fraud detection cukup baik.</strong></p>
+<p><strong>6.Deployment</strong><br />
+Mengimplementasikan model ke dalam sistem produksi.<br />
+Contoh: <strong>Menggunakan model dalam website untuk rekomendasi produk.</strong></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Selamat Datang di dokumentasi Matakuliah Data Mining</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Data-Understanding.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Data Understanding dalam Data Mining</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-data-mining"><strong>1.Pengertian Data Mining</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perbedaan-data-mining-dengan-teknik-lain"><strong>1.1. Perbedaan Data Mining dengan Teknik Lain</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-data-dalam-data-mining"><strong>2. Jenis Data dalam Data Mining</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teknik-teknik-utama-dalam-data-mining"><strong>3️.Teknik-Teknik Utama dalam Data Mining</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-klasifikasi"><strong>3.1. Classification (Klasifikasi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-pengelompokan"><strong>3.2. Clustering (Pengelompokan)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#association-rule-learning-aturan-asosiasi"><strong>3.3. Association Rule Learning (Aturan Asosiasi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-regresi"><strong>3.4. Regression (Regresi)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anomaly-detection-deteksi-anomali"><strong>3.5. Anomaly Detection (Deteksi Anomali)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-data-mining-crisp-dm-model"><strong>4️.Proses Data Mining (CRISP-DM Model)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-dalam-crisp-dm"><strong>Tahapan dalam CRISP-DM</strong>:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data Engineering wanna be
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

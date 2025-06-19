@@ -1,0 +1,2169 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Naive Bayes &#8212; Rendy Devano Danendra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Naive-Bayes';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UTS" href="UTS-PenambanganData.html" />
+    <link rel="prev" title="Konsep dasar LOF" href="Konsep-dasar-LOF.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/data.png" class="logo__image only-light" alt="Rendy Devano Danendra - Home"/>
+    <script>document.write(`<img src="_static/data.png" class="logo__image only-dark" alt="Rendy Devano Danendra - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang di dokumentasi Matakuliah Data Mining
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="TugasPertemuan1.html"><strong>Konsep Dasar Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Data-Understanding.html"><strong>Data Understanding dalam Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-KNN.html"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-LOF.html"><strong>Konsep dasar LOF</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Naive Bayes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS-PenambanganData.html">UTS</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="K-Means.html"><strong>kmean-clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Fuzzy-C-Means-Clustering.html"><strong>Fuzzy C-Means Clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree Classifier</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Perbandingan%20model%20Klasifikasi%20Naive%20Bayes%20dan%20Decision%20Tree.html">Perbandingan model Klasifikasi Naive Bayes dan Decision Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PRA-UAS.html">Klasifikasi Kualitas Wine Menggunakan Teknik Data Mining</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD/issues/new?title=Issue%20on%20page%20%2FNaive-Bayes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Naive-Bayes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Naive Bayes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengenalan-naive-bayes"><strong>Pengenalan Naive Bayes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-naive-bayes"><strong>Apa itu Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-naive-bayes"><strong>Pengertian Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar"><strong>Konsep Dasar</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-naive-bayes"><strong>Implementasi Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-jenis-naive-bayes"><strong>Jenis-jenis Naive Bayes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prinsip-dasar"><strong>Prinsip Dasar</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-bayes"><strong>Teorema Bayes:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan"><strong>Penjelasan:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan"><strong>Tujuan:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-klasifikasi"><strong>Langkah-langkah Klasifikasi</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data"><strong>1. Persiapan Data:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-probabilitas-awal-p-y"><strong>2. Hitung Probabilitas Awal (( P(Y) ))</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-likelihood-p-x-y"><strong>3. Hitung Likelihood (( P(X|Y) ))</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gabungkan-dengan-teorema-bayes"><strong>4. Gabungkan dengan Teorema Bayes:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-kelas"><strong>5. Prediksi Kelas:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan"><strong>Kelebihan dan Kekurangan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan"><strong>Kelebihan:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangan"><strong>Kekurangan:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-perhitungan-manual-gaussian-naive-bayes-dengan-variance"><strong>Langkah-langkah Perhitungan Manual Gaussian Naïve Bayes dengan Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>1. Persiapan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-probabilitas-awal-p-y"><strong>2. Menghitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-mean-mu-dan-variance-sigma-2"><strong>3. Menghitung Mean (<span class="math notranslate nohighlight">\(\mu\)</span>) dan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-likelihood-p-x-y-menggunakan-distribusi-gaussian"><strong>4. Menghitung Likelihood <span class="math notranslate nohighlight">\( P(X|Y) \)</span> Menggunakan Distribusi Gaussian</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-dengan-teorema-bayes"><strong>5. Menggabungkan dengan Teorema Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>6. Prediksi Kelas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-gaussian-naive-bayes"><strong>Contoh perhitungan manual Gaussian Naïve Bayes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-mahasiswa"><strong>📌 Dataset Mahasiswa</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-probabilitas-awal-p-y"><strong>Langkah 1: Hitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-mean-mu-dan-variance-sigma-2"><strong>Langkah 2: Hitung Mean <span class="math notranslate nohighlight">\(\mu\)</span> dan Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-a"><strong>Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-b"><strong>Kelas B</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-c"><strong>Kelas C</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-hitung-likelihood-p-x-y-menggunakan-distribusi-gaussian"><strong>Langkah 3: Hitung Likelihood ( P(X|Y) ) Menggunakan Distribusi Gaussian</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-4-hitung-p-y-x-menggunakan-teorema-bayes"><strong>Langkah 4: Hitung ( P(Y|X) ) Menggunakan Teorema Bayes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-5-prediksi-kelas"><strong>Langkah 5: Prediksi Kelas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-variance-sigma-2"><strong>Rumus Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-variance-untuk-kelas-a"><strong>Menghitung Variance untuk Kelas A</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-ipk-di-kelas-a"><strong>1️. Variance untuk Fitur IPK di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-kehadiran-di-kelas-a"><strong>2️. Variance untuk Fitur Kehadiran di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-tugas-di-kelas-a"><strong>3️. Variance untuk Fitur Tugas di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-ujian-di-kelas-a"><strong>4️. Variance untuk Fitur Ujian di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-variance-sigma-2-untuk-semua-kelas"><strong>Ringkasan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>) untuk Semua Kelas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-variance-dalam-gaussian-naive-bayes"><strong>Menggunakan Variance dalam Gaussian Naïve Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selanjutnya-kita-akan-membandingkan-dataset-iris-yang-ada-outlier-dan-tanpa-outlier"><strong>Selanjutnya kita akan membandingkan dataset iris yang ada outlier dan tanpa outlier</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-setelah-outlier-dihapus"><strong>Data setelah outlier dihapus</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="naive-bayes">
+<h1><strong>Naive Bayes</strong><a class="headerlink" href="#naive-bayes" title="Link to this heading">#</a></h1>
+<section id="pengenalan-naive-bayes">
+<h2><strong>Pengenalan Naive Bayes</strong><a class="headerlink" href="#pengenalan-naive-bayes" title="Link to this heading">#</a></h2>
+<section id="apa-itu-naive-bayes">
+<h3><strong>Apa itu Naive Bayes</strong><a class="headerlink" href="#apa-itu-naive-bayes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Algoritma klasifikasi berbasis probabilitas.</p></li>
+<li><p>Digunakan untuk memprediksi kelas suatu data berdasarkan fitur-fiturnya.</p></li>
+<li><p>Termasuk dalam keluarga algoritma Machine Learning Supervised Learning.</p></li>
+</ul>
+</section>
+<section id="pengertian-naive-bayes">
+<h3><strong>Pengertian Naive Bayes</strong><a class="headerlink" href="#pengertian-naive-bayes" title="Link to this heading">#</a></h3>
+<p>Naïve Bayes adalah algoritme machine learning yang digunakan untuk klasifikasi berdasarkan Teorema Bayes, yaitu menghitung probabilitas suatu kejadian berdasarkan informasi sebelumnya. Metode ini sering digunakan untuk berbagai tugas klasifikasi karena cepat dan efisien dalam menangani data dengan banyak fitur.</p>
+</section>
+<section id="konsep-dasar">
+<h3><strong>Konsep Dasar</strong><a class="headerlink" href="#konsep-dasar" title="Link to this heading">#</a></h3>
+<p>Disebut “naïve” karena mengasumsikan bahwa setiap fitur bersifat independen, meskipun dalam kenyataan seringkali fitur-fitur tersebut saling berkaitan.<br />
+Contoh: Dalam penilaian kredit, faktor seperti pendapatan, riwayat pinjaman, dan usia dianggap tidak saling memengaruhi, meskipun sebenarnya bisa berkaitan.</p>
+</section>
+<section id="implementasi-naive-bayes">
+<h3><strong>Implementasi Naive Bayes</strong><a class="headerlink" href="#implementasi-naive-bayes" title="Link to this heading">#</a></h3>
+<p><strong>Naïve Bayes</strong> banyak digunakan dalam berbagai aplikasi, seperti:<br />
+Klasifikasi dokumen → Menentukan apakah suatu teks bertema olahraga, teknologi, politik, dll.<br />
+Deteksi spam → Menentukan apakah email termasuk spam atau bukan.<br />
+Sistem rekomendasi → Menyaring dan merekomendasikan produk atau konten.<br />
+Analisis sentimen → Menganalisis apakah ulasan suatu produk bernada positif atau negatif.<br />
+Prediksi cuaca → Menentukan kemungkinan kondisi cuaca berdasarkan data historis.</p>
+</section>
+<section id="jenis-jenis-naive-bayes">
+<h3><strong>Jenis-jenis Naive Bayes</strong><a class="headerlink" href="#jenis-jenis-naive-bayes" title="Link to this heading">#</a></h3>
+<p>Multinomial Naïve Bayes → Digunakan untuk klasifikasi teks berdasarkan frekuensi kata dalam dokumen.</p>
+<p>Gaussian Naïve Bayes → Digunakan untuk data kontinu yang diasumsikan mengikuti distribusi normal (Gaussian).</p>
+<p>Bernoulli Naïve Bayes → Digunakan untuk data dengan nilai Boolean (ya/tidak, muncul/tidak).</p>
+</section>
+</section>
+<section id="prinsip-dasar">
+<h2><strong>Prinsip Dasar</strong><a class="headerlink" href="#prinsip-dasar" title="Link to this heading">#</a></h2>
+<section id="teorema-bayes">
+<h3><strong>Teorema Bayes:</strong><a class="headerlink" href="#teorema-bayes" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+P(Y|X) = \frac{P(X|Y) \cdot P(Y)}{P(X)}
+\]</div>
+</section>
+<section id="penjelasan">
+<h3><strong>Penjelasan:</strong><a class="headerlink" href="#penjelasan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>( P(Y|X) )</strong>: Probabilitas posterior (kelas <strong>Y</strong> diberikan fitur <strong>X</strong>).</p></li>
+<li><p><strong>( P(X|Y) )</strong>: Likelihood (probabilitas fitur <strong>X</strong> diberikan kelas <strong>Y</strong>).</p></li>
+<li><p><strong>( P(Y) )</strong>: Prior probability (probabilitas awal kelas <strong>Y</strong>).</p></li>
+<li><p><strong>( P(X) )</strong>: Evidence (probabilitas fitur <strong>X</strong> secara keseluruhan).</p></li>
+</ul>
+</section>
+<section id="tujuan">
+<h3><strong>Tujuan:</strong><a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h3>
+<p>Mencari kelas <strong>Y</strong> dengan nilai <strong>( P(Y|X) )</strong> tertinggi.</p>
+</section>
+</section>
+<section id="langkah-langkah-klasifikasi">
+<h2><strong>Langkah-langkah Klasifikasi</strong><a class="headerlink" href="#langkah-langkah-klasifikasi" title="Link to this heading">#</a></h2>
+<section id="persiapan-data">
+<h3><strong>1. Persiapan Data:</strong><a class="headerlink" href="#persiapan-data" title="Link to this heading">#</a></h3>
+<p>Pisahkan data menjadi fitur (<strong>X</strong>) dan label (<strong>Y</strong>).</p>
+</section>
+<section id="hitung-probabilitas-awal-p-y">
+<h3><strong>2. Hitung Probabilitas Awal (( P(Y) ))</strong><a class="headerlink" href="#hitung-probabilitas-awal-p-y" title="Link to this heading">#</a></h3>
+<p>Hitung frekuensi setiap kelas dalam dataset.</p>
+</section>
+<section id="hitung-likelihood-p-x-y">
+<h3><strong>3. Hitung Likelihood (( P(X|Y) ))</strong><a class="headerlink" href="#hitung-likelihood-p-x-y" title="Link to this heading">#</a></h3>
+<p>Untuk setiap fitur, hitung probabilitas kemunculannya dalam setiap kelas.</p>
+</section>
+<section id="gabungkan-dengan-teorema-bayes">
+<h3><strong>4. Gabungkan dengan Teorema Bayes:</strong><a class="headerlink" href="#gabungkan-dengan-teorema-bayes" title="Link to this heading">#</a></h3>
+<p>Gunakan rumus:<br />
+$<span class="math notranslate nohighlight">\(
+  P(Y|X) = \frac{P(X|Y) \cdot P(Y)}{P(X)}
+  \)</span>$</p>
+</section>
+<section id="prediksi-kelas">
+<h3><strong>5. Prediksi Kelas:</strong><a class="headerlink" href="#prediksi-kelas" title="Link to this heading">#</a></h3>
+<p>Pilih kelas dengan nilai ( P(Y|X) ) tertinggi.</p>
+</section>
+</section>
+<section id="kelebihan-dan-kekurangan">
+<h2><strong>Kelebihan dan Kekurangan</strong><a class="headerlink" href="#kelebihan-dan-kekurangan" title="Link to this heading">#</a></h2>
+<section id="kelebihan">
+<h3><strong>Kelebihan:</strong><a class="headerlink" href="#kelebihan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sederhana dan mudah diimplementasikan.</p></li>
+<li><p>Cepat dan efisien untuk dataset besar.</p></li>
+<li><p>Cocok untuk data dengan banyak fitur.</p></li>
+<li><p>Dapat digunakan untuk berbagai jenis data, termasuk teks dan numerik.</p></li>
+<li><p>Memberikan hasil yang baik meskipun dengan jumlah data pelatihan yang sedikit.</p></li>
+</ul>
+</section>
+<section id="kekurangan">
+<h3><strong>Kekurangan:</strong><a class="headerlink" href="#kekurangan" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Asumsi independensi fitur seringkali tidak realistis.</p></li>
+<li><p>Performa menurun jika fitur saling bergantung.</p></li>
+<li><p>Memerlukan penanganan khusus untuk data dengan probabilitas nol.</p></li>
+<li><p>Sensitif terhadap data dengan distribusi yang tidak seimbang.</p></li>
+<li><p>Tidak selalu akurat dibandingkan dengan model yang lebih kompleks seperti Random Forest atau SVM.</p></li>
+</ul>
+</section>
+</section>
+<section id="langkah-langkah-perhitungan-manual-gaussian-naive-bayes-dengan-variance">
+<h2><strong>Langkah-langkah Perhitungan Manual Gaussian Naïve Bayes dengan Variance</strong><a class="headerlink" href="#langkah-langkah-perhitungan-manual-gaussian-naive-bayes-dengan-variance" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3><strong>1. Persiapan Data</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pisahkan dataset menjadi fitur <span class="math notranslate nohighlight">\( X \)</span> dan label <span class="math notranslate nohighlight">\( Y \)</span>.</p></li>
+</ul>
+</section>
+<section id="menghitung-probabilitas-awal-p-y">
+<h3><strong>2. Menghitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong><a class="headerlink" href="#menghitung-probabilitas-awal-p-y" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Hitung probabilitas setiap kelas dalam dataset:
+$<span class="math notranslate nohighlight">\(
+P(Y) = \frac{\text{Jumlah sampel dalam kelas tersebut}}{\text{Total sampel}}
+\)</span>$</p></li>
+</ul>
+</section>
+<section id="menghitung-mean-mu-dan-variance-sigma-2">
+<h3><strong>3. Menghitung Mean (<span class="math notranslate nohighlight">\(\mu\)</span>) dan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong><a class="headerlink" href="#menghitung-mean-mu-dan-variance-sigma-2" title="Link to this heading">#</a></h3>
+<p>Untuk setiap fitur dalam setiap kelas:</p>
+<ul class="simple">
+<li><p><strong>Rata-rata (Mean)</strong>
+$<span class="math notranslate nohighlight">\(
+\mu = \frac{\sum x}{N}
+\)</span>$</p></li>
+<li><p><strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong>
+$<span class="math notranslate nohighlight">\(
+\sigma^2 = \frac{\sum (x_i - \mu)^2}{N}
+\)</span>$
+Variance menggantikan standar deviasi dalam perhitungan distribusi normal.</p></li>
+</ul>
+</section>
+<section id="menghitung-likelihood-p-x-y-menggunakan-distribusi-gaussian">
+<h3><strong>4. Menghitung Likelihood <span class="math notranslate nohighlight">\( P(X|Y) \)</span> Menggunakan Distribusi Gaussian</strong><a class="headerlink" href="#menghitung-likelihood-p-x-y-menggunakan-distribusi-gaussian" title="Link to this heading">#</a></h3>
+<p>Gunakan rumus <strong>distribusi Gaussian</strong> dengan variance:<br />
+$<span class="math notranslate nohighlight">\(  
+P(x|\mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\)</span>$<br />
+Untuk setiap fitur  X_i , hitung probabilitasnya berdasarkan mean dan variance dari kelas yang bersangkutan.</p>
+</section>
+<section id="menggabungkan-dengan-teorema-bayes">
+<h3><strong>5. Menggabungkan dengan Teorema Bayes</strong><a class="headerlink" href="#menggabungkan-dengan-teorema-bayes" title="Link to this heading">#</a></h3>
+<p>Gunakan Teorema Bayes untuk menghitung probabilitas posterior:<br />
+$<span class="math notranslate nohighlight">\(  
+P(Y|X) = \frac{P(X|Y) P(Y)}{P(X)}
+\)</span>$<br />
+Karena  P(X)  sama untuk semua kelas, kita cukup mencari nilai P(Y|X)  terbesar.</p>
+</section>
+<section id="id2">
+<h3><strong>6. Prediksi Kelas</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pilih kelas <span class="math notranslate nohighlight">\( Y \)</span> dengan nilai <span class="math notranslate nohighlight">\( P(Y|X) \)</span> tertinggi.</p></li>
+</ul>
+</section>
+</section>
+<section id="contoh-perhitungan-manual-gaussian-naive-bayes">
+<h2><strong>Contoh perhitungan manual Gaussian Naïve Bayes</strong><a class="headerlink" href="#contoh-perhitungan-manual-gaussian-naive-bayes" title="Link to this heading">#</a></h2>
+<p>menggunakan <strong>15 data mahasiswa</strong>, dengan <strong>4 fitur</strong> dan <strong>3 kelas label</strong>.</p>
+<section id="dataset-mahasiswa">
+<h3><strong>📌 Dataset Mahasiswa</strong><a class="headerlink" href="#dataset-mahasiswa" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>IPK</p></th>
+<th class="head"><p>Kehadiran (%)</p></th>
+<th class="head"><p>Tugas</p></th>
+<th class="head"><p>Ujian</p></th>
+<th class="head"><p>Kelas (Label)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>3.5</p></td>
+<td><p>90</p></td>
+<td><p>80</p></td>
+<td><p>85</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>3.8</p></td>
+<td><p>85</p></td>
+<td><p>78</p></td>
+<td><p>88</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>3.6</p></td>
+<td><p>92</p></td>
+<td><p>82</p></td>
+<td><p>84</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>3.9</p></td>
+<td><p>80</p></td>
+<td><p>79</p></td>
+<td><p>89</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>3.7</p></td>
+<td><p>87</p></td>
+<td><p>81</p></td>
+<td><p>86</p></td>
+<td><p>A</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>3.2</p></td>
+<td><p>75</p></td>
+<td><p>70</p></td>
+<td><p>78</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>3.0</p></td>
+<td><p>80</p></td>
+<td><p>72</p></td>
+<td><p>76</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>2.9</p></td>
+<td><p>78</p></td>
+<td><p>74</p></td>
+<td><p>75</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>3.1</p></td>
+<td><p>77</p></td>
+<td><p>71</p></td>
+<td><p>77</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>3.3</p></td>
+<td><p>74</p></td>
+<td><p>69</p></td>
+<td><p>79</p></td>
+<td><p>B</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>2.5</p></td>
+<td><p>60</p></td>
+<td><p>60</p></td>
+<td><p>65</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>2.7</p></td>
+<td><p>55</p></td>
+<td><p>58</p></td>
+<td><p>63</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>2.6</p></td>
+<td><p>57</p></td>
+<td><p>59</p></td>
+<td><p>64</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>2.8</p></td>
+<td><p>53</p></td>
+<td><p>57</p></td>
+<td><p>62</p></td>
+<td><p>C</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>2.4</p></td>
+<td><p>50</p></td>
+<td><p>55</p></td>
+<td><p>60</p></td>
+<td><p>C</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="langkah-1-hitung-probabilitas-awal-p-y">
+<h2><strong>Langkah 1: Hitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong><a class="headerlink" href="#langkah-1-hitung-probabilitas-awal-p-y" title="Link to this heading">#</a></h2>
+<p>Jumlah mahasiswa per kelas:</p>
+<ul class="simple">
+<li><p><strong>A</strong> = 5</p></li>
+<li><p><strong>B</strong> = 5</p></li>
+<li><p><strong>C</strong> = 5<br />
+Total = 15</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(A) = \frac{5}{15} = 0.33
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P(B) = \frac{5}{15} = 0.33
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P(C) = \frac{5}{15} = 0.33
+\]</div>
+</section>
+<section id="langkah-2-hitung-mean-mu-dan-variance-sigma-2">
+<h2><strong>Langkah 2: Hitung Mean <span class="math notranslate nohighlight">\(\mu\)</span> dan Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong><a class="headerlink" href="#langkah-2-hitung-mean-mu-dan-variance-sigma-2" title="Link to this heading">#</a></h2>
+<section id="kelas-a">
+<h3><strong>Kelas A</strong><a class="headerlink" href="#kelas-a" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>Mean <span class="math notranslate nohighlight">\(\mu\)</span></p></th>
+<th class="head"><p>Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IPK</p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{3.5 + 3.8 + 3.6 + 3.9 + 3.7}{5} = 3.7 \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( \frac{(3.5-3.7)^2 + (3.8-3.7)^2 + ...}{5} = 0.02 \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Kehadiran</p></td>
+<td><p>86.8</p></td>
+<td><p>17.36</p></td>
+</tr>
+<tr class="row-even"><td><p>Tugas</p></td>
+<td><p>80</p></td>
+<td><p>2.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ujian</p></td>
+<td><p>86.4</p></td>
+<td><p>4.64</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kelas-b">
+<h3><strong>Kelas B</strong><a class="headerlink" href="#kelas-b" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>Mean <span class="math notranslate nohighlight">\(\mu\)</span></p></th>
+<th class="head"><p>Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IPK</p></td>
+<td><p>3.1</p></td>
+<td><p>0.02</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kehadiran</p></td>
+<td><p>76.8</p></td>
+<td><p>5.36</p></td>
+</tr>
+<tr class="row-even"><td><p>Tugas</p></td>
+<td><p>71.2</p></td>
+<td><p>6.96</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ujian</p></td>
+<td><p>77</p></td>
+<td><p>1.36</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kelas-c">
+<h3><strong>Kelas C</strong><a class="headerlink" href="#kelas-c" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p>Mean <span class="math notranslate nohighlight">\(\mu\)</span></p></th>
+<th class="head"><p>Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IPK</p></td>
+<td><p>2.6</p></td>
+<td><p>0.02</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kehadiran</p></td>
+<td><p>55</p></td>
+<td><p>11.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Tugas</p></td>
+<td><p>57.8</p></td>
+<td><p>3.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ujian</p></td>
+<td><p>62.8</p></td>
+<td><p>4.2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="langkah-3-hitung-likelihood-p-x-y-menggunakan-distribusi-gaussian">
+<h2><strong>Langkah 3: Hitung Likelihood ( P(X|Y) ) Menggunakan Distribusi Gaussian</strong><a class="headerlink" href="#langkah-3-hitung-likelihood-p-x-y-menggunakan-distribusi-gaussian" title="Link to this heading">#</a></h2>
+<p>Misalkan ada <strong>mahasiswa baru</strong> dengan data berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>IPK</p></th>
+<th class="head"><p>Kehadiran (%)</p></th>
+<th class="head"><p>Tugas</p></th>
+<th class="head"><p>Ujian</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>3.4</p></td>
+<td><p>82</p></td>
+<td><p>75</p></td>
+<td><p>80</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Gunakan <strong>Distribusi Gaussian</strong> untuk menghitung probabilitas masing-masing kelas:</p>
+<div class="math notranslate nohighlight">
+\[P(x|\mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}\]</div>
+<p>Untuk IPK kelas <strong>A</strong>:</p>
+<div class="math notranslate nohighlight">
+\[P(3.4 | A) = \frac{1}{\sqrt{2\pi(0.02)}} e^{-\frac{(3.4 - 3.7)^2}{2(0.02)}}\]</div>
+<p>Untuk Kehadiran kelas <strong>A</strong>:</p>
+<div class="math notranslate nohighlight">
+\[P(82 | A) = \frac{1}{\sqrt{2\pi(17.36)}} e^{-\frac{(82 - 86.8)^2}{2(17.36)}}\]</div>
+<p>Lakukan perhitungan serupa untuk semua fitur dan semua kelas.</p>
+</section>
+<section id="langkah-4-hitung-p-y-x-menggunakan-teorema-bayes">
+<h2><strong>Langkah 4: Hitung ( P(Y|X) ) Menggunakan Teorema Bayes</strong><a class="headerlink" href="#langkah-4-hitung-p-y-x-menggunakan-teorema-bayes" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(
+P(A|X) = P(X|A) P(A)
+\)</span>
+<span class="math notranslate nohighlight">\(
+P(B|X) = P(X|B) P(B)
+\)</span>
+<span class="math notranslate nohighlight">\(
+P(C|X) = P(X|C) P(C)
+\)</span></p>
+<p>Bandingkan hasilnya dan pilih kelas dengan nilai probabilitas terbesar.</p>
+</section>
+<section id="langkah-5-prediksi-kelas">
+<h2><strong>Langkah 5: Prediksi Kelas</strong><a class="headerlink" href="#langkah-5-prediksi-kelas" title="Link to this heading">#</a></h2>
+<p>Misalnya setelah perhitungan, diperoleh:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( P(A|X) = 0.50 \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( P(B|X) = 0.30 \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( P(C|X) = 0.20 \)</span></p></li>
+</ul>
+<p>Maka, <strong>mahasiswa baru diklasifikasikan sebagai kelas A</strong>.</p>
+<p><strong>Catatan:</strong></p>
+<ul class="simple">
+<li><p>Perhitungan manual ini bisa sangat panjang, sehingga biasanya menggunakan Python untuk menghitungnya.</p></li>
+<li><p>Jika ingin melihat implementasi dalam Python,scrol ke paling bawah namun saya menggunakan dataset yang berbeda</p></li>
+</ul>
+</section>
+<section id="rumus-variance-sigma-2">
+<h2><strong>Rumus Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong><a class="headerlink" href="#rumus-variance-sigma-2" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\sigma^2 = \frac{\sum (x_i - \mu)^2}{N}\)</span>
+di mana:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( x_i \)</span> adalah nilai dari fitur tertentu dalam suatu kelas,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \mu \)</span> adalah mean dari fitur dalam kelas tersebut,</p></li>
+<li><p><span class="math notranslate nohighlight">\( N \)</span> adalah jumlah data dalam kelas.</p></li>
+</ul>
+</section>
+<section id="menghitung-variance-untuk-kelas-a">
+<h2><strong>Menghitung Variance untuk Kelas A</strong><a class="headerlink" href="#menghitung-variance-untuk-kelas-a" title="Link to this heading">#</a></h2>
+<section id="variance-untuk-fitur-ipk-di-kelas-a">
+<h3><strong>1️. Variance untuk Fitur IPK di Kelas A</strong><a class="headerlink" href="#variance-untuk-fitur-ipk-di-kelas-a" title="Link to this heading">#</a></h3>
+<p><strong>Data IPK Kelas A:</strong><br />
+<span class="math notranslate nohighlight">\(3.5, 3.8, 3.6, 3.9, 3.7\)</span></p>
+<p><strong>Mean (<span class="math notranslate nohighlight">\(\mu\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{IPK,A} = \frac{3.5 + 3.8 + 3.6 + 3.9 + 3.7}{5} = 3.7\]</div>
+<p><strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2_{IPK,A} = \frac{(3.5 - 3.7)^2 + (3.8 - 3.7)^2 + (3.6 - 3.7)^2 + (3.9 - 3.7)^2 + (3.7 - 3.7)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{(-0.2)^2 + (0.1)^2 + (-0.1)^2 + (0.2)^2 + (0.0)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{0.04 + 0.01 + 0.01 + 0.04 + 0.00}{5} = \frac{0.10}{5} = 0.02\]</div>
+</section>
+<section id="variance-untuk-fitur-kehadiran-di-kelas-a">
+<h3><strong>2️. Variance untuk Fitur Kehadiran di Kelas A</strong><a class="headerlink" href="#variance-untuk-fitur-kehadiran-di-kelas-a" title="Link to this heading">#</a></h3>
+<p><strong>Data Kehadiran Kelas A:</strong><br />
+<span class="math notranslate nohighlight">\( 90, 85, 92, 80, 87 \)</span></p>
+<p><strong>Mean (<span class="math notranslate nohighlight">\(\mu\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{Kehadiran,A} = \frac{90 + 85 + 92 + 80 + 87}{5} = 86.8\]</div>
+<p><strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2_{Kehadiran,A} = \frac{(90 - 86.8)^2 + (85 - 86.8)^2 + (92 - 86.8)^2 + (80 - 86.8)^2 + (87 - 86.8)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{(3.2)^2 + (-1.8)^2 + (5.2)^2 + (-6.8)^2 + (0.2)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{10.24 + 3.24 + 27.04 + 46.24 + 0.04}{5} = \frac{86.8}{5} = 17.36\]</div>
+</section>
+<section id="variance-untuk-fitur-tugas-di-kelas-a">
+<h3><strong>3️. Variance untuk Fitur Tugas di Kelas A</strong><a class="headerlink" href="#variance-untuk-fitur-tugas-di-kelas-a" title="Link to this heading">#</a></h3>
+<p><strong>Data Tugas Kelas A:</strong><br />
+<span class="math notranslate nohighlight">\( 80, 78, 82, 79, 81 \)</span></p>
+<p><strong>Mean (<span class="math notranslate nohighlight">\(\mu\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{Tugas,A} = \frac{80 + 78 + 82 + 79 + 81}{5} = 80\]</div>
+<p><strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2_{Tugas,A} = \frac{(80-80)^2 + (78-80)^2 + (82-80)^2 + (79-80)^2 + (81-80)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{0 + 4 + 4 + 1 + 1}{5} = \frac{10}{5} = 2.5\]</div>
+</section>
+<section id="variance-untuk-fitur-ujian-di-kelas-a">
+<h3><strong>4️. Variance untuk Fitur Ujian di Kelas A</strong><a class="headerlink" href="#variance-untuk-fitur-ujian-di-kelas-a" title="Link to this heading">#</a></h3>
+<p><strong>Data Ujian Kelas A:</strong><br />
+<span class="math notranslate nohighlight">\( 85, 88, 84, 89, 86 \)</span></p>
+<p><strong>Mean (<span class="math notranslate nohighlight">\(\mu\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{Ujian,A} = \frac{85 + 88 + 84 + 89 + 86}{5} = 86.4\]</div>
+<p><strong>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^2_{Ujian,A} = \frac{(85-86.4)^2 + (88-86.4)^2 + (84-86.4)^2 + (89-86.4)^2 + (86-86.4)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{(-1.4)^2 + (1.6)^2 + (-2.4)^2 + (2.6)^2 + (-0.4)^2}{5}\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{1.96 + 2.56 + 5.76 + 6.76 + 0.16}{5} = \frac{17.2}{5} = 4.64\]</div>
+</section>
+<section id="ringkasan-variance-sigma-2-untuk-semua-kelas">
+<h3><strong>Ringkasan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>) untuk Semua Kelas</strong><a class="headerlink" href="#ringkasan-variance-sigma-2-untuk-semua-kelas" title="Link to this heading">#</a></h3>
+<p>Sekarang kita susun hasil perhitungan variance untuk semua kelas dalam tabel berikut:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Fitur</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\sigma^2_A\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\sigma^2_B\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\sigma^2_C\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>IPK</p></td>
+<td><p>0.02</p></td>
+<td><p>0.02</p></td>
+<td><p>0.02</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kehadiran</p></td>
+<td><p>17.36</p></td>
+<td><p>5.36</p></td>
+<td><p>11.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Tugas</p></td>
+<td><p>2.5</p></td>
+<td><p>6.96</p></td>
+<td><p>3.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ujian</p></td>
+<td><p>4.64</p></td>
+<td><p>1.36</p></td>
+<td><p>4.2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="menggunakan-variance-dalam-gaussian-naive-bayes">
+<h3><strong>Menggunakan Variance dalam Gaussian Naïve Bayes</strong><a class="headerlink" href="#menggunakan-variance-dalam-gaussian-naive-bayes" title="Link to this heading">#</a></h3>
+<p>Setelah mendapatkan variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>), kita gunakan dalam <strong>distribusi Gaussian</strong>:</p>
+<div class="math notranslate nohighlight">
+\[  
+P(x|\mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\]</div>
+<p>Misalkan kita ingin menghitung probabilitas untuk <strong>IPK = 3.4 dalam Kelas A</strong>, kita substitusi:</p>
+<div class="math notranslate nohighlight">
+\[  
+P(3.4 | A) = \frac{1}{\sqrt{2\pi(0.02)}} e^{-\frac{(3.4 - 3.7)^2}{2(0.02)}}
+\]</div>
+<p>Lakukan hal yang sama untuk semua fitur dan kelas lainnya.</p>
+<p><strong>Kesimpulan:</strong></p>
+<ul class="simple">
+<li><p>Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>) sudah dihitung ulang dan disesuaikan dengan dataset mahasiswa.</p></li>
+<li><p>Hasilnya dapat digunakan dalam distribusi Gaussian untuk menghitung likelihood <span class="math notranslate nohighlight">\( P(X|Y) \)</span>.</p></li>
+<li><p>Selanjutnya, kita bisa melanjutkan perhitungan <span class="math notranslate nohighlight">\( P(Y|X) \)</span> dan menentukan kelas prediksi.</p></li>
+</ul>
+</section>
+<section id="selanjutnya-kita-akan-membandingkan-dataset-iris-yang-ada-outlier-dan-tanpa-outlier">
+<h3><strong>Selanjutnya kita akan membandingkan dataset iris yang ada outlier dan tanpa outlier</strong><a class="headerlink" href="#selanjutnya-kita-akan-membandingkan-dataset-iris-yang-ada-outlier-dan-tanpa-outlier" title="Link to this heading">#</a></h3>
+<p><strong>Import Library</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span> <span class="pre">(pd)</span></code>: Manipulasi data (baca CSV, hapus kolom, dsb.).<br />
+<code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">(np)</span></code>: Operasi numerik (tidak digunakan langsung di kode ini, tapi berguna untuk perhitungan).<br />
+<code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code>: Mengubah label kategori (string) menjadi angka agar bisa digunakan dalam machine learning.<br />
+<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>: Membagi dataset menjadi data training dan testing.</p>
+<p><strong>Membaca dataset dari File csv</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;combined_data.csv&#39;</span><span class="p">)</span>  <span class="c1"># Sesuaikan dengan nama file CSV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membaca dataset dari file CSV bernama <code class="docutils literal notranslate"><span class="pre">combined_data.csv</span></code>.<br />
+Menyimpan data dalam format DataFrame <code class="docutils literal notranslate"><span class="pre">(df)</span></code>.</p>
+<p><strong>Menghapus kolom kolom pertama ID</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kolom ID dihapus karena biasanya tidak memiliki pengaruh dalam proses klasifikasi atau prediksi.</p>
+<p>Menghapus kolom pertama dari dataset (diasumsikan sebagai kolom <code class="docutils literal notranslate"><span class="pre">ID</span></code>).<br />
+<code class="docutils literal notranslate"><span class="pre">iloc[:,</span> <span class="pre">1:]</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">:</span></code> → Pilih semua baris.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1:</span></code> → Pilih semua kolom mulai dari indeks ke-1 (menghapus kolom ke-0).</p></li>
+</ul>
+<p><strong>Memisahkan Label Kelas (y) dan Fitur (X)</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>   <span class="c1"># Kolom pertama setelah ID adalah label kelas</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>  <span class="c1"># Sisanya adalah fitur numerik</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">df.iloc[:,</span> <span class="pre">0]</span></code>: Mengambil kolom pertama sebagai label <strong>kelas</strong> (y).<br />
+<code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">df.iloc[:,</span> <span class="pre">1:]</span></code>: Mengambil kolom lainnya sebagai <strong>fitur</strong> (X).</p>
+<p><strong>Mengubah Label Kelas dari String ke Angka</strong><br />
+Mengapa perlu labelnya di ubah yang sebelumnya string ke angka?<br />
+karena ,ika kelas masih dalam bentuk string, model tidak bisa melakukan operasi matematika.<br />
+Sebagai contoh, Gaussian Naïve Bayes menghitung probabilitas berdasarkan statistik, yang hanya bisa diterapkan pada angka.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>  <span class="c1"># Konversi label kelas dari string ke angka</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LabelEncoder()</span></code>: Membuat encoder untuk mengubah label kategori menjadi angka.<br />
+<code class="docutils literal notranslate"><span class="pre">.fit_transform(y)</span></code>:</p>
+<ul class="simple">
+<li><p>Mengubah nilai string dalam <code class="docutils literal notranslate"><span class="pre">y</span></code> menjadi angka (misalnya, <code class="docutils literal notranslate"><span class="pre">'setosa'</span></code> → <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">'versicolor'</span></code> → <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">'virginica'</span></code> → <code class="docutils literal notranslate"><span class="pre">2</span></code>).</p></li>
+</ul>
+<p><strong>Mengubah Semua Fitur (X) Menjadi Float</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mengonversi semua fitur <code class="docutils literal notranslate"><span class="pre">(X)</span></code> menjadi tipe data float.<br />
+Ini diperlukan karena beberapa algoritma ML tidak bisa bekerja dengan tipe data selain numerik.</p>
+<p><strong>Menampilkan Data yang Telah Diproses</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset berhasil diproses. Berikut beberapa data pertama:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset berhasil diproses. Berikut beberapa data pertama:
+         class  petal_length  petal_width  sepal_length  sepal_width
+0  Iris-setosa           1.4          0.2           4.4          3.2
+1  Iris-setosa           1.4          0.2           4.9          3.0
+2  Iris-setosa           1.3          0.2           4.7          3.2
+3  Iris-setosa           1.5          0.2           4.6          3.1
+4  Iris-setosa           1.4          0.2           5.0          3.6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menampilkan pesan sukses setelah preprocessing selesai.<br />
+<code class="docutils literal notranslate"><span class="pre">df.head()</span></code>: Menampilkan 5 baris pertama dataset untuk verifikasi.</p>
+<p><strong>Memilih Fitur</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>  <span class="c1"># Label target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Memilih 4 fitur utama dari dataset <code class="docutils literal notranslate"><span class="pre">(sepal_length,</span> <span class="pre">sepal_width,</span> <span class="pre">petal_length,</span> <span class="pre">petal_width)</span></code>.<br />
+<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">df['class']</span></code>: Menentukan target klasifikasi (class).</p>
+<p><strong>Persiapan data dan Membagi Dataset menjadi Training dan Testing</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Membagi dataset menjadi:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">80%</span></code> data training <code class="docutils literal notranslate"><span class="pre">(X_train,</span> <span class="pre">y_train)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">20%</span></code> data testing <code class="docutils literal notranslate"><span class="pre">(X_test,</span> <span class="pre">y_test)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code>: Agar hasil pembagian selalu sama setiap dijalankan.</p></li>
+</ul>
+<p><strong>Menampilkan Ukuran Data Setelah Split</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_train shape:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Harus (n_train, 4)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_test shape:&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>    <span class="c1"># Harus (n_test, 4)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X_train shape: (120, 4)
+X_test shape: (30, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menampilkan jumlah sampel dan fitur setelah data dibagi.<br />
+<code class="docutils literal notranslate"><span class="pre">.shape</span></code>: Mengembalikan jumlah baris dan kolom dalam dataset.<br />
+<code class="docutils literal notranslate"><span class="pre">X_train.shape</span></code> dan <code class="docutils literal notranslate"><span class="pre">X_test.shape</span></code> harus berupa <code class="docutils literal notranslate"><span class="pre">(jumlah_sampel,</span> <span class="pre">4)</span></code>, karena kita hanya memiliki 4 fitur.</p>
+<p><strong>Inisialisasi Model</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Melatih model</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: #000;
+  --sklearn-color-text-muted: #666;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.5em;
+}
+
+#sk-container-id-1 label.sk-toggleable__label .caption {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: var(--sklearn-color-text-muted);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  display: none;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 0.5em;
+  text-align: center;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+
+.estimator-table summary {
+    padding: .5rem;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left;
+}
+
+.user-set td.value pre {
+    color:rgb(255, 94, 0) !important;
+    background-color: transparent !important;
+}
+
+.default td {
+    color: black;
+    text-align: left;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><body><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GaussianNB()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GaussianNB</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.naive_bayes.GaussianNB.html">?<span>Documentation for GaussianNB</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('priors',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">priors&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('var_smoothing',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">var_smoothing&nbsp;</td>
+            <td class="value">1e-09</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling.textContent.trim();
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+</script></body></div></div>
+</div>
+<p><strong>Memprediksi hasil</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Mengecek akurasi</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi:&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi: 0.9666666666666667
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-setelah-outlier-dihapus">
+<h3><strong>Data setelah outlier dihapus</strong><a class="headerlink" href="#data-setelah-outlier-dihapus" title="Link to this heading">#</a></h3>
+<p><strong>Import Library</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalOutlierFactor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code>: Digunakan untuk mendeteksi outlier dalam dataset.<br />
+<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>: Membagi dataset menjadi data training dan testing.<br />
+<code class="docutils literal notranslate"><span class="pre">GaussianNB</span></code>: Model Gaussian Naïve Bayes untuk klasifikasi.<br />
+<code class="docutils literal notranslate"><span class="pre">accuracy_score</span></code>: Menghitung akurasi prediksi model.</p>
+<p><strong>Menentukan Kolom Numerik</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeric_columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span> <span class="s1">&#39;int64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mendeteksi kolom yang berisi data numerik <code class="docutils literal notranslate"><span class="pre">(float64</span> <span class="pre">dan</span> <span class="pre">int64)</span></code>.<br />
+Mengembalikan daftar nama kolom numerik dalam dataset.<br />
+Ini penting karena <code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor</span></code>hanya bisa bekerja dengan data numerik.</p>
+<p><strong>Menghapus Outlier Menggunakan LOF</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lof</span> <span class="o">=</span> <span class="n">LocalOutlierFactor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">contamination</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">lof</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">numeric_columns</span><span class="p">])</span>
+<span class="n">df_no_outliers_lof</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">outliers</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LocalOutlierFactor(n_neighbors=20,</span> <span class="pre">contamination=0.05)</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors=20</span></code> → Melihat 20 tetangga terdekat untuk menentukan apakah titik itu outlier atau bukan.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contamination=0.05</span></code> → 5% data dianggap outlier.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">lof.fit_predict(df[numeric_columns])</span></code>:</p>
+<ul class="simple">
+<li><p>Mendeteksi outlier dalam dataset.</p></li>
+<li><p>Hasilnya adalah array label (1 untuk data normal, -1 untuk outlier).</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">df[outliers</span> <span class="pre">==</span> <span class="pre">1]</span></code>:</p>
+<ul class="simple">
+<li><p>Hanya menyimpan data yang bukan outlier <code class="docutils literal notranslate"><span class="pre">(1)</span></code>.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">.reset_index(drop=True)</span></code>:</p>
+<ul class="simple">
+<li><p>Mereset indeks agar tidak ada indeks yang hilang setelah data dihapus.</p></li>
+</ul>
+<p><strong>Menghapus Baris dengan ID = 1</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">df_no_outliers_lof</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">df_no_outliers_lof</span> <span class="o">=</span> <span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Memeriksa apakah ada kolom <code class="docutils literal notranslate"><span class="pre">'id'</span></code> dalam dataset.<br />
+Jika ada, hapus baris dengan <code class="docutils literal notranslate"><span class="pre">ID</span> <span class="pre">=</span> <span class="pre">1</span></code>.<br />
+<code class="docutils literal notranslate"><span class="pre">reset_index(drop=True)</span></code>: Agar indeks tetap berurutan setelah penghapusan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;class&#39;</span> <span class="ow">in</span> <span class="n">df_no_outliers_lof</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="n">numeric_columns</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Membagi data menjadi training dan testing</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+    <span class="c1"># Melatih ulang Gaussian Naïve Bayes</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="c1"># Menghitung akurasi</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi setelah LOF dan hapus ID = 1:&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kolom &#39;class&#39; tidak ditemukan dalam dataset.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Akurasi setelah LOF dan hapus ID = 1: 0.9655172413793104
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Memeriksa Apakah Kolom ‘class’ Ada</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;class&#39;</span> <span class="ow">in</span> <span class="n">df_no_outliers_lof</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><strong>Pastikan dataset memiliki kolom <code class="docutils literal notranslate"><span class="pre">'class'</span></code></strong> (label target untuk klasifikasi).</p></li>
+<li><p>Jika tidak ada, program akan mencetak pesan error dan tidak menjalankan training model.</p></li>
+</ul>
+<p><strong>Menyiapkan Data untuk Training &amp; Testing</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="n">numeric_columns</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_no_outliers_lof</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: <strong>Fitur (independent variables)</strong> → Semua kolom numerik dalam dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: <strong>Target (dependent variable)</strong> → Kolom <code class="docutils literal notranslate"><span class="pre">'class'</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><strong>Membagi dataset menjadi 80% training dan 20% testing</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">random_state=42</span></code> → Agar hasil pembagian selalu sama setiap dijalankan.</p></li>
+</ul>
+<p><strong>Melatih Model Gaussian Naïve Bayes</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GaussianNB()</span></code>: <strong>Membuat model Naïve Bayes dengan distribusi Gaussian</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.fit(X_train,</span> <span class="pre">y_train)</span></code>: <strong>Melatih model menggunakan data training</strong>.</p></li>
+</ul>
+<p><strong>Memprediksi Data Testing</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><strong>Memprediksi kelas dari data testing (<code class="docutils literal notranslate"><span class="pre">X_test</span></code>)</strong>.</p></li>
+</ul>
+<p><strong>Menghitung Akurasi Model</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Akurasi setelah LOF dan hapus ID=1:&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p><strong>Membandingkan hasil prediksi (<code class="docutils literal notranslate"><span class="pre">y_pred</span></code>) dengan label asli (<code class="docutils literal notranslate"><span class="pre">y_test</span></code>)</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">accuracy_score(y_test,</span> <span class="pre">y_pred)</span></code>: <strong>Menghitung akurasi model</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print()</span></code> → Menampilkan akurasi ke layar.</p></li>
+</ul>
+<p><strong>Jika Kolom ‘class’ Tidak Ada</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kolom &#39;class&#39; tidak ditemukan dalam dataset.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Fungsi:</strong></p>
+<ul class="simple">
+<li><p>Jika <strong>tidak ada kolom <code class="docutils literal notranslate"><span class="pre">'class'</span></code></strong>, maka model tidak bisa dilatih.</p></li>
+<li><p>Program akan <strong>menampilkan pesan error</strong> dan berhenti.</p></li>
+</ul>
+</section>
+</section>
+<section id="kesimpulan">
+<h2><strong>Kesimpulan</strong><a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Setelah menghapus outlier menggunakan <strong>Local Outlier Factor (LOF)</strong>, akurasi sedikit menurun dari <strong>96.67% menjadi 96.55%</strong>.</p></li>
+<li><p>Menghapus outlier <strong>tidak selalu meningkatkan akurasi</strong>, kadang justru bisa sedikit menurunkannya.</p></li>
+<li><p><strong>Tidak semua outlier harus dihapus</strong>, karena ada kemungkinan mereka mengandung informasi yang berguna untuk model.</p></li>
+<li><p>Sebelum menghapus outlier, <strong>perlu dicek dulu apakah mereka benar-benar mengganggu hasil atau tidak</strong>.</p></li>
+</ol>
+<p>Jadi, dalam kasus ini, <strong>menghapus outlier tidak terlalu berpengaruh</strong> dan metode lain mungkin lebih efektif untuk meningkatkan akurasi.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Konsep-dasar-LOF.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Konsep dasar LOF</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="UTS-PenambanganData.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UTS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengenalan-naive-bayes"><strong>Pengenalan Naive Bayes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-naive-bayes"><strong>Apa itu Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-naive-bayes"><strong>Pengertian Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-dasar"><strong>Konsep Dasar</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-naive-bayes"><strong>Implementasi Naive Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jenis-jenis-naive-bayes"><strong>Jenis-jenis Naive Bayes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prinsip-dasar"><strong>Prinsip Dasar</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-bayes"><strong>Teorema Bayes:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan"><strong>Penjelasan:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan"><strong>Tujuan:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-klasifikasi"><strong>Langkah-langkah Klasifikasi</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data"><strong>1. Persiapan Data:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-probabilitas-awal-p-y"><strong>2. Hitung Probabilitas Awal (( P(Y) ))</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-likelihood-p-x-y"><strong>3. Hitung Likelihood (( P(X|Y) ))</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gabungkan-dengan-teorema-bayes"><strong>4. Gabungkan dengan Teorema Bayes:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediksi-kelas"><strong>5. Prediksi Kelas:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan-dan-kekurangan"><strong>Kelebihan dan Kekurangan</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelebihan"><strong>Kelebihan:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kekurangan"><strong>Kekurangan:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-perhitungan-manual-gaussian-naive-bayes-dengan-variance"><strong>Langkah-langkah Perhitungan Manual Gaussian Naïve Bayes dengan Variance</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>1. Persiapan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-probabilitas-awal-p-y"><strong>2. Menghitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-mean-mu-dan-variance-sigma-2"><strong>3. Menghitung Mean (<span class="math notranslate nohighlight">\(\mu\)</span>) dan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-likelihood-p-x-y-menggunakan-distribusi-gaussian"><strong>4. Menghitung Likelihood <span class="math notranslate nohighlight">\( P(X|Y) \)</span> Menggunakan Distribusi Gaussian</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-dengan-teorema-bayes"><strong>5. Menggabungkan dengan Teorema Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>6. Prediksi Kelas</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-perhitungan-manual-gaussian-naive-bayes"><strong>Contoh perhitungan manual Gaussian Naïve Bayes</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-mahasiswa"><strong>📌 Dataset Mahasiswa</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-1-hitung-probabilitas-awal-p-y"><strong>Langkah 1: Hitung Probabilitas Awal <span class="math notranslate nohighlight">\( P(Y) \)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-2-hitung-mean-mu-dan-variance-sigma-2"><strong>Langkah 2: Hitung Mean <span class="math notranslate nohighlight">\(\mu\)</span> dan Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-a"><strong>Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-b"><strong>Kelas B</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kelas-c"><strong>Kelas C</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-3-hitung-likelihood-p-x-y-menggunakan-distribusi-gaussian"><strong>Langkah 3: Hitung Likelihood ( P(X|Y) ) Menggunakan Distribusi Gaussian</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-4-hitung-p-y-x-menggunakan-teorema-bayes"><strong>Langkah 4: Hitung ( P(Y|X) ) Menggunakan Teorema Bayes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-5-prediksi-kelas"><strong>Langkah 5: Prediksi Kelas</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumus-variance-sigma-2"><strong>Rumus Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-variance-untuk-kelas-a"><strong>Menghitung Variance untuk Kelas A</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-ipk-di-kelas-a"><strong>1️. Variance untuk Fitur IPK di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-kehadiran-di-kelas-a"><strong>2️. Variance untuk Fitur Kehadiran di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-tugas-di-kelas-a"><strong>3️. Variance untuk Fitur Tugas di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-untuk-fitur-ujian-di-kelas-a"><strong>4️. Variance untuk Fitur Ujian di Kelas A</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ringkasan-variance-sigma-2-untuk-semua-kelas"><strong>Ringkasan Variance (<span class="math notranslate nohighlight">\(\sigma^2\)</span>) untuk Semua Kelas</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggunakan-variance-dalam-gaussian-naive-bayes"><strong>Menggunakan Variance dalam Gaussian Naïve Bayes</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selanjutnya-kita-akan-membandingkan-dataset-iris-yang-ada-outlier-dan-tanpa-outlier"><strong>Selanjutnya kita akan membandingkan dataset iris yang ada outlier dan tanpa outlier</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-setelah-outlier-dihapus"><strong>Data setelah outlier dihapus</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data Engineering wanna be
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

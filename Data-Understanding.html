@@ -1,0 +1,1944 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Understanding dalam Data Mining &#8212; Rendy Devano Danendra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Data-Understanding';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Macam-macam tipe data dan Konsep dasar KNN" href="Konsep-dasar-KNN.html" />
+    <link rel="prev" title="Konsep Dasar Data Mining" href="TugasPertemuan1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/data.png" class="logo__image only-light" alt="Rendy Devano Danendra - Home"/>
+    <script>document.write(`<img src="_static/data.png" class="logo__image only-dark" alt="Rendy Devano Danendra - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang di dokumentasi Matakuliah Data Mining
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="TugasPertemuan1.html"><strong>Konsep Dasar Data Mining</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Data Understanding dalam Data Mining</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-KNN.html"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Konsep-dasar-LOF.html"><strong>Konsep dasar LOF</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Naive-Bayes.html"><strong>Naive Bayes</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="UTS-PenambanganData.html">UTS</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="K-Means.html"><strong>kmean-clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Fuzzy-C-Means-Clustering.html"><strong>Fuzzy C-Means Clustering</strong></a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Decision-Tree.html">Decision Tree Classifier</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Perbandingan%20model%20Klasifikasi%20Naive%20Bayes%20dan%20Decision%20Tree.html">Perbandingan model Klasifikasi Naive Bayes dan Decision Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PRA-UAS.html">Klasifikasi Kualitas Wine Menggunakan Teknik Data Mining</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rendydevanodanendra/pendataD/issues/new?title=Issue%20on%20page%20%2FData-Understanding.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Data-Understanding.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Understanding dalam Data Mining</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-understanding"><strong>Apa itu Data Understanding?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-understanding"><strong>Tujuan Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-dalam-data-understanding"><strong>Langkah-Langkah dalam Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-kasus-data-understanding-dalam-praktik"><strong>Contoh Kasus: Data Understanding dalam Praktik</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-data-understanding"><strong>Manfaat Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#untuk-memahami-data-understanding-perlu-library"><strong>Untuk memahami Data Understanding perlu library</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data"><strong>1. Pengumpulan Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-pengumpulan-data"><strong>Langkah Pengumpulan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-aiven-io"><strong>Apa itu Aiven.io?</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-iris"><strong>Dataset Iris</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data"><strong>Sumber Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library"><strong>Import Library</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-file-env"><strong>Memuat File <code class="docutils literal notranslate"><span class="pre">.env</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-database"><strong>Konfigurasi Koneksi Database</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyusun-string-koneksi-postgresql"><strong>Menyusun String Koneksi PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyusun-string-koneksi-mysql"><strong>Menyusun String Koneksi MySQL:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-engine-database"><strong>Membuat Engine Database</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blok-try-finally"><strong>Blok Try-Finally</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-query-untuk-mysql"><strong>Definisi Query untuk MySQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-query-untuk-postgresql"><strong>Definisi Query untuk PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-data"><strong>Menampilkan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-mysql"><strong>Mengambil Data dari MySQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-postgresql"><strong>Mengambil Data dari PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-data"><strong>Menggabungkan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-hasil-gabungan"><strong>Menampilkan Hasil Gabungan</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-dataframe-gabungan-ke-file-csv"><strong>menyimpan DataFrame gabungan ke file CSV</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-data"><strong>2. Profiling Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif"><strong>Statistik Deskriptif</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-missing-values"><strong>Pemeriksaan Missing Values:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-data"><strong>Distribusi Data:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi"><strong>Analisis Korelasi</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-data"><strong>3. Visualisasi Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram"><strong>Histogram</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot"><strong>Box Plot</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot"><strong>Scatter Plot</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-understanding-dalam-data-mining">
+<h1><strong>Data Understanding dalam Data Mining</strong><a class="headerlink" href="#data-understanding-dalam-data-mining" title="Link to this heading">#</a></h1>
+<p><strong>Data Understanding</strong> adalah salah satu tahap penting dalam proses <strong>Knowledge Discovery in Databases (KDD)</strong> atau <strong>Data Mining</strong>. Ini merupakan langkah awal yang bertujuan untuk memahami data secara mendalam sebelum melakukan analisis lebih lanjut. Pemahaman data yang baik sangat krusial karena akan memengaruhi keberhasilan seluruh proses data mining.</p>
+<section id="apa-itu-data-understanding">
+<h2><strong>Apa itu Data Understanding?</strong><a class="headerlink" href="#apa-itu-data-understanding" title="Link to this heading">#</a></h2>
+<p>Proses eksplorasi, investigasi, dan analisis awal terhadap dataset untuk:</p>
+<ul class="simple">
+<li><p>Memahami struktur, isi, dan karakteristik data.</p></li>
+<li><p>Mengidentifikasi pola, tren, anomali, atau masalah dalam data.</p></li>
+<li><p>Menentukan apakah data tersebut sesuai dengan tujuan analisis atau perlu dilakukan preprocessing tambahan.</p></li>
+</ul>
+<p>Tahap ini sering dianggap sebagai fondasi dari keseluruhan proses data mining karena hasilnya akan memandu langkah-langkah berikutnya, seperti <strong>data preparation, modeling,</strong> dan <strong>evaluation.</strong></p>
+</section>
+<section id="tujuan-data-understanding">
+<h2><strong>Tujuan Data Understanding</strong><a class="headerlink" href="#tujuan-data-understanding" title="Link to this heading">#</a></h2>
+<p>Tujuan utama dari data understanding adalah:</p>
+<ul class="simple">
+<li><p><strong>Memahami Konteks Data:</strong><br />
+Mengetahui dari mana data berasal, apa arti setiap variabel, dan bagaimana hubungan antarvariabel.</p></li>
+<li><p><strong>Mendeteksi Masalah Data:</strong><br />
+Mengidentifikasi <em>missing values</em>, <em>outliers</em>, <em>noise</em>, atau inkonsistensi dalam data.</p></li>
+<li><p><strong>Menilai Kualitas Data:</strong><br />
+Memastikan bahwa data cukup berkualitas untuk digunakan dalam analisis. Hal ini meliputi pemeriksaan akurasi, kelengkapan, dan relevansi data.</p></li>
+<li><p><strong>Menentukan Arah Analisis:</strong><br />
+Berdasarkan pemahaman awal, peneliti dapat merumuskan hipotesis atau menentukan teknik <em>data mining</em> yang tepat.</p></li>
+</ul>
+</section>
+<section id="langkah-langkah-dalam-data-understanding">
+<h2><strong>Langkah-Langkah dalam Data Understanding</strong><a class="headerlink" href="#langkah-langkah-dalam-data-understanding" title="Link to this heading">#</a></h2>
+<p><strong>Pengumpulan Data</strong></p>
+<ul class="simple">
+<li><p>Mengumpulkan data dari berbagai sumber, seperti database, file CSV, API, atau sensor.</p></li>
+<li><p>Memastikan bahwa semua data yang relevan telah dikumpulkan sesuai tujuan analisis.</p></li>
+</ul>
+<p><strong>Sampling</strong></p>
+<ul class="simple">
+<li><p>Jika dataset sangat besar, sampling dapat digunakan untuk memahami subset data tanpa harus memproses seluruh dataset.</p></li>
+</ul>
+<p><strong>Profiling Data</strong></p>
+<ul class="simple">
+<li><p>Membuat ringkasan tentang setiap variabel dalam dataset, termasuk tipe data (numerik, kategorikal, ordinal), rentang nilai, dan frekuensi kemunculan.</p></li>
+<li><p>Memahami hubungan antarvariabel menggunakan korelasi atau analisis asosiasi.</p></li>
+</ul>
+<p><strong>Visualisasi Data</strong></p>
+<ul class="simple">
+<li><p><strong>Histogram</strong>: Untuk melihat distribusi data numerik.</p></li>
+<li><p><strong>Box Plot</strong>: Untuk mendeteksi outliers.</p></li>
+<li><p><strong>Scatter Plot</strong>: Untuk melihat hubungan antara dua variabel numerik.</p></li>
+<li><p><strong>Bar Chart/Pie Chart</strong>: Untuk memvisualisasikan proporsi variabel kategorikal.</p></li>
+</ul>
+<p><strong>Korelasi dan Asosiasi</strong></p>
+<ul class="simple">
+<li><p>Menghitung koefisien korelasi (misalnya Pearson, Spearman) untuk melihat hubungan linier antar variabel.</p></li>
+<li><p>Menggunakan teknik asosiasi untuk menemukan pola hubungan antara variabel kategorikal.</p></li>
+</ul>
+<p><strong>Identifikasi Masalah Data</strong></p>
+<ul class="simple">
+<li><p><strong>Missing Values:</strong> Menemukan data yang hilang atau tidak lengkap.</p></li>
+<li><p><strong>Outliers:</strong> Mendeteksi nilai-nilai ekstrem yang mungkin merupakan kesalahan atau anomali.</p></li>
+<li><p><strong>Duplikasi Data:</strong> Mengidentifikasi baris atau entri yang duplikat.</p></li>
+<li><p><strong>Inkonsistensi:</strong> Memeriksa apakah ada ketidaksesuaian dalam format atau nilai data.</p></li>
+</ul>
+<p><strong>Validasi Data</strong></p>
+<ul class="simple">
+<li><p>Memastikan bahwa data sesuai dengan domain atau konteks bisnis.</p></li>
+<li><p>Memverifikasi apakah data mencerminkan realitas atau fenomena yang ingin dipelajari.</p></li>
+</ul>
+</section>
+<section id="contoh-kasus-data-understanding-dalam-praktik">
+<h2><strong>Contoh Kasus: Data Understanding dalam Praktik</strong><a class="headerlink" href="#contoh-kasus-data-understanding-dalam-praktik" title="Link to this heading">#</a></h2>
+<p>Misalkan Anda sedang menganalisis dataset penjualan produk di sebuah toko online. Berikut adalah contoh aktivitas data understanding:</p>
+<ol class="arabic simple">
+<li><p><strong>Eksplorasi Awal:</strong></p>
+<ul class="simple">
+<li><p>Dataset berisi kolom: <code class="docutils literal notranslate"><span class="pre">ID_Produk</span></code>, <code class="docutils literal notranslate"><span class="pre">Nama_Produk</span></code>, <code class="docutils literal notranslate"><span class="pre">Harga</span></code>, <code class="docutils literal notranslate"><span class="pre">Jumlah_Terjual</span></code>, <code class="docutils literal notranslate"><span class="pre">Tanggal_Penjualan</span></code>.</p></li>
+<li><p>Menghitung statistik deskriptif untuk kolom numerik (<code class="docutils literal notranslate"><span class="pre">Harga</span></code> dan <code class="docutils literal notranslate"><span class="pre">Jumlah_Terjual</span></code>).</p></li>
+</ul>
+</li>
+<li><p><strong>Identifikasi Masalah:</strong></p>
+<ul class="simple">
+<li><p>Menemukan beberapa baris dengan nilai <code class="docutils literal notranslate"><span class="pre">Harga</span> <span class="pre">=</span> <span class="pre">0</span></code> (mungkin kesalahan input).</p></li>
+<li><p>Ada tanggal penjualan yang tidak valid (misalnya, 31 Februari).</p></li>
+</ul>
+</li>
+<li><p><strong>Visualisasi:</strong></p>
+<ul class="simple">
+<li><p>Membuat histogram untuk melihat distribusi harga produk.</p></li>
+<li><p>Membuat scatter plot antara <code class="docutils literal notranslate"><span class="pre">Harga</span></code> dan <code class="docutils literal notranslate"><span class="pre">Jumlah_Terjual</span></code> untuk melihat apakah ada hubungan.</p></li>
+</ul>
+</li>
+<li><p><strong>Profiling Data:</strong></p>
+<ul class="simple">
+<li><p>Kolom <code class="docutils literal notranslate"><span class="pre">Nama_Produk</span></code> memiliki 100 kategori unik.</p></li>
+<li><p>Rata-rata harga produk adalah Rp500.000, dengan standar deviasi Rp200.000.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="manfaat-data-understanding">
+<h2><strong>Manfaat Data Understanding</strong><a class="headerlink" href="#manfaat-data-understanding" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Meningkatkan Kualitas Data:</strong> Dengan memahami masalah data, kita dapat melakukan preprocessing yang lebih efektif.</p></li>
+<li><p><strong>Menghemat Waktu dan Biaya:</strong> Menghindari kesalahan analisis yang disebabkan oleh data buruk.</p></li>
+<li><p><strong>Mendukung Pengambilan Keputusan:</strong> Memberikan wawasan awal yang berguna untuk merumuskan strategi analisis.</p></li>
+<li><p><strong>Mengurangi Risiko Kesalahan Model:</strong> Data yang dipahami dengan baik akan menghasilkan model prediktif yang lebih akurat.</p></li>
+</ul>
+</section>
+<section id="kesimpulan">
+<h2><strong>Kesimpulan</strong><a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h2>
+<p>Data understanding adalah langkah kritis dalam data mining yang membantu memastikan bahwa data yang digunakan berkualitas dan relevan. Dengan melakukan eksplorasi dan analisis awal, kita dapat mengidentifikasi masalah, memahami pola, dan menentukan arah analisis yang tepat. Tanpa pemahaman data yang baik, hasil dari proses data mining mungkin tidak akurat atau bahkan menyesatkan.</p>
+</section>
+<section id="untuk-memahami-data-understanding-perlu-library">
+<h2><strong>Untuk memahami Data Understanding perlu library</strong><a class="headerlink" href="#untuk-memahami-data-understanding-perlu-library" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Bahasa pemrograman misal Python (Pandas, Matplotlib, Seaborn) atau tools visualisasi seperti Tableau/Power BI.</p></li>
+<li><p>Mencatat semua temuan selama eksplorasi data untuk referensi di tahap selanjutnya.</p></li>
+<li><p>Libatkan domain expert jika data berkaitan dengan bidang spesifik (misalnya medis, keuangan).</p></li>
+</ol>
+</section>
+<section id="pengumpulan-data">
+<h2><strong>1. Pengumpulan Data</strong><a class="headerlink" href="#pengumpulan-data" title="Link to this heading">#</a></h2>
+<section id="langkah-pengumpulan-data">
+<h3><strong>Langkah Pengumpulan Data</strong><a class="headerlink" href="#langkah-pengumpulan-data" title="Link to this heading">#</a></h3>
+<p>Sebelum melakukan proses data mining, langkah pertama yang perlu dilakukan adalah <strong>pengumpulan data</strong>. Sebagai contoh, dalam studi ini kita menggunakan <strong>dataset Iris</strong> yang diambil dari dua sumber database berbeda di platform <a class="reference external" href="http://Aiven.io">Aiven.io</a>.</p>
+</section>
+<section id="apa-itu-aiven-io">
+<h3><strong>Apa itu <a class="reference external" href="http://Aiven.io">Aiven.io</a>?</strong><a class="headerlink" href="#apa-itu-aiven-io" title="Link to this heading">#</a></h3>
+<p><strong><a class="reference external" href="http://Aiven.io">Aiven.io</a></strong> adalah platform layanan cloud terkelola yang menyediakan berbagai infrastruktur data open source secara siap pakai. Dengan Aiven, perusahaan dan pengembang dapat menggunakan database seperti PostgreSQL, MySQL, Apache Kafka, serta layanan lainnya (misalnya Elasticsearch, Redis, dan InfluxDB) tanpa harus repot mengelola infrastruktur dan skalabilitasnya sendiri. Aiven menangani aspek-aspek seperti keamanan, backup, monitoring, dan pemeliharaan, sehingga pengguna dapat fokus pada pengembangan aplikasi dan analisis data.</p>
+</section>
+<section id="dataset-iris">
+<h3><strong>Dataset Iris</strong><a class="headerlink" href="#dataset-iris" title="Link to this heading">#</a></h3>
+<p><strong>Dataset Iris</strong> adalah dataset klasik yang sering digunakan dalam penelitian data mining dan machine learning. Dataset ini mengandung data mengenai tiga jenis bunga Iris:</p>
+<ul class="simple">
+<li><p><strong>Iris setosa</strong></p></li>
+<li><p><strong>Iris versicolor</strong></p></li>
+<li><p><strong>Iris virginica</strong></p></li>
+</ul>
+<p>Setiap sampel pada dataset ini memiliki empat fitur utama:</p>
+<ul class="simple">
+<li><p><strong>Panjang sepal</strong></p></li>
+<li><p><strong>Lebar sepal</strong></p></li>
+<li><p><strong>Panjang petal</strong></p></li>
+<li><p><strong>Lebar petal</strong></p></li>
+</ul>
+</section>
+<section id="sumber-data">
+<h3><strong>Sumber Data</strong><a class="headerlink" href="#sumber-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data Iris Petal</strong>: Disimpan di database <strong>MySQL</strong>.</p></li>
+<li><p><strong>Data Iris Sepal</strong>: Disimpan di database <strong>PostgreSQL</strong>.</p></li>
+</ul>
+<p>Dengan pengumpulan data dari kedua sumber tersebut, data mining dapat dilakukan untuk menggabungkan dan menganalisis informasi guna menemukan pola dan insight yang berguna.baik selanjutnya langsung ke proses <strong>pengumpulan data dan pengambungan data</strong></p>
+<p><strong>menginstal berbagai paket Python yang diperlukan untuk proyek analisis data dan data mining</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pymysql pandas psycopg2 sqlalchemy seaborn numpy pandas scikit-learn pyod matplotlib seaborn python-dotenv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymysql
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading PyMySQL-1.1.1-py3-none-any.whl.metadata (4.4 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pandas
+  Downloading pandas-2.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (91 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting psycopg2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading psycopg2-2.9.10.tar.gz (385 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25hRequirement already satisfied: sqlalchemy in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.0.41)
+Collecting seaborn
+  Downloading seaborn-0.13.2-py3-none-any.whl.metadata (5.4 kB)
+Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (2.2.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scikit-learn
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading scikit_learn-1.7.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (17 kB)
+Collecting pyod
+  Downloading pyod-2.0.5-py3-none-any.whl.metadata (46 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (3.10.3)
+Collecting python-dotenv
+  Downloading python_dotenv-1.1.0-py3-none-any.whl.metadata (24 kB)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pytz&gt;=2020.1 (from pandas)
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting tzdata&gt;=2022.7 (from pandas)
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: greenlet&gt;=1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from sqlalchemy) (3.2.3)
+Requirement already satisfied: typing-extensions&gt;=4.6.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from sqlalchemy) (4.14.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scipy&gt;=1.8.0 (from scikit-learn)
+  Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting joblib&gt;=1.2.0 (from scikit-learn)
+  Downloading joblib-1.5.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting threadpoolctl&gt;=3.1.0 (from scikit-learn)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numba&gt;=0.51 (from pyod)
+  Downloading numba-0.61.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.8 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: contourpy&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (4.58.4)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (1.4.8)
+Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow&gt;=8 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (11.2.1)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib) (3.2.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting llvmlite&lt;0.45,&gt;=0.44.0dev0 (from numba&gt;=0.51-&gt;pyod)
+  Downloading llvmlite-0.44.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.8 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.17.0)
+Downloading PyMySQL-1.1.1-py3-none-any.whl (44 kB)
+Downloading pandas-2.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.3 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/12.3 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.4/12.3 MB</span> <span class=" -Color -Color-Red">45.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.3/12.3 MB</span> <span class=" -Color -Color-Red">49.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+Downloading scikit_learn-1.7.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.9 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/12.9 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.9/12.9 MB</span> <span class=" -Color -Color-Red">130.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pyod-2.0.5-py3-none-any.whl (200 kB)
+Downloading python_dotenv-1.1.0-py3-none-any.whl (20 kB)
+Downloading joblib-1.5.1-py3-none-any.whl (307 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading numba-0.61.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.8 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.8/3.8 MB</span> <span class=" -Color -Color-Red">142.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading llvmlite-0.44.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (42.4 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/42.4 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">42.2/42.4 MB</span> <span class=" -Color -Color-Red">277.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">42.4/42.4 MB</span> <span class=" -Color -Color-Red">183.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/37.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.7/37.7 MB</span> <span class=" -Color -Color-Red">221.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: psycopg2
+<span class=" -Color -Color-Yellow">  DEPRECATION: Building &#39;psycopg2&#39; using the legacy setup.py bdist_wheel mechanism, which will be removed in a future version. pip 25.3 will enforce this behaviour change. A possible replacement is to use the standardized build interface by setting the `--use-pep517` option, (possibly combined with `--no-build-isolation`), or adding a `pyproject.toml` file to the source tree of &#39;psycopg2&#39;. Discussion can be found at https://github.com/pypa/pip/issues/6334</span>
+
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for psycopg2 (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25h  Created wheel for psycopg2: filename=psycopg2-2.9.10-cp310-cp310-linux_x86_64.whl size=511976 sha256=3839331ac3b4a22edafec62988afb470b8ed7ddeb1ce55e14be7ef4ebdb87a23
+  Stored in directory: /home/runner/.cache/pip/wheels/51/41/e0/2912ad51b01f454d26dfb26e5cc5923874656749b9e83943a8
+Successfully built psycopg2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: pytz, tzdata, threadpoolctl, scipy, python-dotenv, pymysql, psycopg2, llvmlite, joblib, scikit-learn, pandas, numba, seaborn, pyod
+?25l
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/14</span> [tzdata]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/14</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 7/14</span> [llvmlite]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 7/14</span> [llvmlite]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 7/14</span> [llvmlite]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 7/14</span> [llvmlite]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/14</span> [joblib]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 9/14</span> [scikit-learn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">10/14</span> [pandas]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">11/14</span> [numba]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━ <span class=" -Color -Color-Green">12/14</span> [seaborn]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━ <span class=" -Color -Color-Green">13/14</span> [pyod]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">14/14</span> [pyod]
+?25h
+Successfully installed joblib-1.5.1 llvmlite-0.44.0 numba-0.61.2 pandas-2.3.0 psycopg2-2.9.10 pymysql-1.1.1 pyod-2.0.5 python-dotenv-1.1.0 pytz-2025.2 scikit-learn-1.7.0 scipy-1.15.3 seaborn-0.13.2 threadpoolctl-3.6.0 tzdata-2025.2
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pymysql</span></code><br />
+Fungsi: Driver untuk koneksi ke database MySQL menggunakan Python.<br />
+Kegunaan: Digunakan oleh SQLAlchemy untuk membuat koneksi ke MySQL.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pandas</span></code><br />
+Fungsi: Library untuk manipulasi dan analisis data, terutama menggunakan struktur data DataFrame.<br />
+Kegunaan: Membaca, mengolah, dan mengekspor data dari berbagai sumber (seperti database, CSV, Excel).</p>
+<p><code class="docutils literal notranslate"><span class="pre">psycopg2</span></code><br />
+Fungsi: Driver untuk koneksi ke database PostgreSQL.<br />
+Kegunaan: Digunakan oleh SQLAlchemy untuk membuat koneksi ke PostgreSQL.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sqlalchemy</span></code><br />
+Fungsi: Toolkit dan Object Relational Mapper (ORM) untuk Python.<br />
+Kegunaan: Memudahkan pembuatan koneksi dan interaksi dengan database menggunakan sintaks Python.</p>
+<p><code class="docutils literal notranslate"><span class="pre">seaborn</span></code><br />
+Fungsi: Library visualisasi data berbasis matplotlib yang menyediakan antarmuka tingkat tinggi untuk membuat grafik statistik.<br />
+Kegunaan: Membantu membuat visualisasi data yang menarik dan informatif dengan sintaks yang lebih sederhana.</p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code><br />
+Fungsi: Library untuk komputasi numerik di Python dengan dukungan array multidimensi.<br />
+Kegunaan: Dasar bagi banyak operasi numerik dan ilmiah, serta digunakan oleh library lain seperti Pandas dan scikit-learn.</p>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code><br />
+Fungsi: Library untuk machine learning dan data mining di Python.<br />
+Kegunaan: Menyediakan algoritma-algoritma untuk klasifikasi, regresi, clustering, dan pemrosesan data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pyod</span></code>
+Fungsi: Library Python untuk deteksi outlier (anomaly detection).<br />
+Kegunaan: Berguna untuk mengidentifikasi data abnormal atau outlier dalam dataset, sebuah tugas penting dalam data mining.</p>
+<p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code><br />
+Fungsi: Library untuk membuat grafik dan visualisasi data di Python.<br />
+Kegunaan: Digunakan sebagai dasar untuk visualisasi dan merupakan fondasi bagi library lain seperti seaborn.</p>
+<p><code class="docutils literal notranslate"><span class="pre">python-dotenv</span></code><br />
+Fungsi: Library untuk memuat variabel lingkungan dari file <code class="docutils literal notranslate"><span class="pre">.env.</span></code><br />
+Kegunaan: Memudahkan pengelolaan kredensial dan konfigurasi tanpa harus hardcode di dalam kode.</p>
+<blockquote>
+<div><p><strong>Catatan:</strong> Perintah di atas menggunakan <code class="docutils literal notranslate"><span class="pre">%pip</span> <span class="pre">install</span></code> yang umum digunakan pada lingkungan Jupyter Notebook. Jika kamu menjalankannya di terminal, cukup gunakan <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> diikuti daftar paketnya.</p>
+</div></blockquote>
+<p>Secara keseluruhan, perintah ini menginstal paket-paket yang mendukung koneksi database, manipulasi data, analisis statistik, machine learning, visualisasi data, serta pengelolaan variabel lingkungan. Paket-paket ini merupakan fondasi utama untuk membangun proyek data mining atau analisis data di Python.</p>
+</section>
+<section id="import-library">
+<h3><strong>Import Library</strong><a class="headerlink" href="#import-library" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">os</span></code>: Untuk mengakses variabel lingkungan (environment variables).<br />
+<code class="docutils literal notranslate"><span class="pre">pandas</span></code>: Digunakan untuk manipulasi data, meskipun dalam kode ini belum dipakai secara eksplisit.<br />
+<code class="docutils literal notranslate"><span class="pre">create_engine</span> <span class="pre">dari</span> <span class="pre">SQLAlchemy</span></code>: Untuk membuat koneksi ke database dalam bentuk “engine”.<br />
+<code class="docutils literal notranslate"><span class="pre">load_dotenv</span></code> dari <code class="docutils literal notranslate"><span class="pre">python-dotenv</span></code>: Untuk memuat file <code class="docutils literal notranslate"><span class="pre">.env</span></code> agar variabel lingkungan (seperti kredensial database) dapat diakses dalam kode.</p>
+</section>
+<section id="memuat-file-env">
+<h3><strong>Memuat File <code class="docutils literal notranslate"><span class="pre">.env</span></code></strong><a class="headerlink" href="#memuat-file-env" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">load_dotenv()</span></code> membaca file <code class="docutils literal notranslate"><span class="pre">.env</span></code> (yang harus berada di direktori yang sama dengan skrip) dan menambahkan variabel-variabel yang ada ke dalam environment sehingga bisa diambil dengan <code class="docutils literal notranslate"><span class="pre">os.getenv()</span></code>.</p>
+</section>
+<section id="konfigurasi-koneksi-database">
+<h3><strong>Konfigurasi Koneksi Database</strong><a class="headerlink" href="#konfigurasi-koneksi-database" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">postgres_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;POSTGRES_HOST&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;POSTGRES_PORT&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;POSTGRES_USER&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;POSTGRES_PASSWORD&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;POSTGRES_DATABASE&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">mysql_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MYSQL_HOST&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MYSQL_PORT&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MYSQL_USER&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MYSQL_PASSWORD&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;MYSQL_DATABASE&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kode ini membuat dua dictionary, satu untuk PostgreSQL dan satu untuk MySQL.<br />
+Masing-masing menggunakan <code class="docutils literal notranslate"><span class="pre">os.getenv()</span></code> untuk mengambil nilai   konfigurasi dari file <code class="docutils literal notranslate"><span class="pre">.env</span> </code>(misalnya, <code class="docutils literal notranslate"><span class="pre">POSTGRES_HOST,</span> <span class="pre">POSTGRES_PORT,</span></code> dll).<br />
+<code class="docutils literal notranslate"><span class="pre">postgres_config</span></code>: Menyimpan konfigurasi untuk koneksi PostgreSQL.<br />
+<code class="docutils literal notranslate"><span class="pre">mysql_config</span></code>: Menyimpan konfigurasi untuk koneksi MySQL.</p>
+</section>
+<section id="menyusun-string-koneksi-postgresql">
+<h3><strong>Menyusun String Koneksi PostgreSQL</strong><a class="headerlink" href="#menyusun-string-koneksi-postgresql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">postgres_conn_str</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;postgresql+psycopg2://</span><span class="si">{</span><span class="n">postgres_config</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">postgres_config</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;@</span><span class="si">{</span><span class="n">postgres_config</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">postgres_config</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">postgres_config</span><span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">?sslmode=require&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Menggunakan format URL untuk SQLAlchemy dengan driver <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code>:
+Awalan <code class="docutils literal notranslate"><span class="pre">postgresql+psycopg2://</span></code> menunjukkan bahwa koneksi menggunakan PostgreSQL dengan driver <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code>.
+<code class="docutils literal notranslate"><span class="pre">{user}:{password}&#64;{host}:{port}/{database}</span></code>: Menyusun kredensial dan alamat host.
+<code class="docutils literal notranslate"><span class="pre">?sslmode=require:</span></code> Parameter tambahan untuk memaksa koneksi menggunakan SSL.</p>
+</section>
+<section id="menyusun-string-koneksi-mysql">
+<h3><strong>Menyusun String Koneksi MySQL:</strong><a class="headerlink" href="#menyusun-string-koneksi-mysql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mysql_conn_str</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;mysql+pymysql://</span><span class="si">{</span><span class="n">mysql_config</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">mysql_config</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;@</span><span class="si">{</span><span class="n">mysql_config</span><span class="p">[</span><span class="s1">&#39;host&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">mysql_config</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">mysql_config</span><span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mirip dengan PostgreSQL, namun awalan <code class="docutils literal notranslate"><span class="pre">mysql+pymysql://</span></code> menunjukkan bahwa koneksi menggunakan MySQL dengan driver <code class="docutils literal notranslate"><span class="pre">pymysql</span></code>.
+String ini menyusun kredensial dan alamat host untuk MySQL.</p>
+</section>
+<section id="membuat-engine-database">
+<h3><strong>Membuat Engine Database</strong><a class="headerlink" href="#membuat-engine-database" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">postgres_conn_str</span><span class="p">)</span>
+<span class="n">mysql_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">mysql_conn_str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pg_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">postgres_conn_str</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">mysql_engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">mysql_conn_str</span><span class="p">)</span>
+
+<span class="nn">File &lt;string&gt;:2,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/sqlalchemy/util/deprecations.py:281,</span> in <span class="ni">deprecated_params.&lt;locals&gt;.decorate.&lt;locals&gt;.warned</span><span class="nt">(fn, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span>     <span class="k">if</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span>         <span class="n">_warn_with_version</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span>             <span class="n">messages</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">277</span>             <span class="n">versions</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>             <span class="n">version_warnings</span><span class="p">[</span><span class="n">m</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span>             <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">280</span>         <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">281</span> <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/sqlalchemy/engine/create.py:549,</span> in <span class="ni">create_engine</span><span class="nt">(url, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;empty_in_strategy&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span> <span class="c1"># create url.URL object</span>
+<span class="ne">--&gt; </span><span class="mi">549</span> <span class="n">u</span> <span class="o">=</span> <span class="n">_url</span><span class="o">.</span><span class="n">make_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span> <span class="n">u</span><span class="p">,</span> <span class="n">plugins</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_instantiate_plugins</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">553</span> <span class="n">entrypoint</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">_get_entrypoint</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/sqlalchemy/engine/url.py:856,</span> in <span class="ni">make_url</span><span class="nt">(name_or_url)</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Given a string, produce a new URL instance.</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span><span class="sd"> The format of the URL generally follows `RFC-1738</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">852</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">856</span>     <span class="k">return</span> <span class="n">_parse_url</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span> <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_or_url</span><span class="p">,</span> <span class="n">URL</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="n">name_or_url</span><span class="p">,</span> <span class="s2">&quot;_sqla_is_testing_if_this_is_a_mock_object&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span> <span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>     <span class="k">raise</span> <span class="n">exc</span><span class="o">.</span><span class="n">ArgumentError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>         <span class="sa">f</span><span class="s2">&quot;Expected string or URL object, got </span><span class="si">{</span><span class="n">name_or_url</span><span class="si">!r}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>     <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/sqlalchemy/engine/url.py:917,</span> in <span class="ni">_parse_url</span><span class="nt">(name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">components</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span>     <span class="k">if</span> <span class="n">components</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">]:</span>
+<span class="ne">--&gt; </span><span class="mi">917</span>         <span class="n">components</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s2">&quot;port&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">919</span>     <span class="k">return</span> <span class="n">URL</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">components</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+<span class="g g-Whitespace">    </span><span class="mi">921</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">ValueError</span>: invalid literal for int() with base 10: &#39;None&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">create_engine()</span></code> dari <code class="docutils literal notranslate"><span class="pre">SQLAlchemy</span></code> membuat objek koneksi (engine) berdasarkan string koneksi yang telah disusun.<br />
+<code class="docutils literal notranslate"><span class="pre">pg_engine</span></code>: Engine untuk koneksi PostgreSQL.<br />
+<code class="docutils literal notranslate"><span class="pre">mysql_engine</span></code>: Engine untuk koneksi MySQL.</p>
+</section>
+<section id="blok-try-finally">
+<h3><strong>Blok Try-Finally</strong><a class="headerlink" href="#blok-try-finally" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sudah terkoneksi&quot;</span><span class="p">)</span>    
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">pg_engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+    <span class="n">mysql_engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sudah terkoneksi
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">try</span></code> Block:<br />
+Mencetak pesan <code class="docutils literal notranslate"><span class="pre">&quot;sudah</span> <span class="pre">terkoneksi&quot;</span></code>. Jika tidak terjadi error selama pembuatan engine, maka pesan ini akan tampil, menandakan bahwa koneksi ke kedua database berhasil.<br />
+<code class="docutils literal notranslate"><span class="pre">finally</span></code> Block:<br />
+Menutup koneksi dengan memanggil <code class="docutils literal notranslate"><span class="pre">dispose()</span></code> pada masing-masing engine. Fungsi <code class="docutils literal notranslate"><span class="pre">dispose()</span></code> memastikan bahwa semua koneksi yang telah dibuat ditutup dengan baik sehingga tidak terjadi kebocoran resource.</p>
+</section>
+<section id="definisi-query-untuk-mysql">
+<h3><strong>Definisi Query untuk MySQL</strong><a class="headerlink" href="#definisi-query-untuk-mysql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mysql_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM iris_data ORDER BY id;&quot;</span>
+<span class="n">df_mysql</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">mysql_query</span><span class="p">,</span> <span class="n">mysql_engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mysql_query</span> <span class="pre">=</span> <span class="pre">&quot;SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">iris_data</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">id;&quot;</span></code><br />
+Query SQL ini mengambil semua baris (<code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span></code>) dari tabel <code class="docutils literal notranslate"><span class="pre">iris_data</span></code> di MySQL dan mengurutkannya berdasarkan kolom <code class="docutils literal notranslate"><span class="pre">id</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">df_mysql</span> <span class="pre">=</span> <span class="pre">pd.read_sql(mysql_query,</span> <span class="pre">mysql_engine)</span></code><br />
+Fungsi <code class="docutils literal notranslate"><span class="pre">pd.read_sql()</span></code> menjalankan query tersebut pada engine MySQL <code class="docutils literal notranslate"><span class="pre">(mysql_engine)</span></code> dan mengembalikan hasilnya sebagai DataFrame (variabel <code class="docutils literal notranslate"><span class="pre">df_mysql</span></code>).</p>
+</section>
+<section id="definisi-query-untuk-postgresql">
+<h3><strong>Definisi Query untuk PostgreSQL</strong><a class="headerlink" href="#definisi-query-untuk-postgresql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pg_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM iris_data ORDER BY id;&quot;</span>
+<span class="n">df_postgres</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">pg_query</span><span class="p">,</span> <span class="n">pg_engine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pg_query</span> <span class="pre">=</span> <span class="pre">&quot;SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">iris_data</span> <span class="pre">ORDER</span> <span class="pre">BY</span> <span class="pre">id;&quot;</span></code>
+Sama seperti query untuk MySQL, query ini mengambil semua baris dari tabel <code class="docutils literal notranslate"><span class="pre">iris_data</span></code> di PostgreSQL dan mengurutkannya berdasarkan <code class="docutils literal notranslate"><span class="pre">id</span></code>.<br />
+<code class="docutils literal notranslate"><span class="pre">df_postgres</span> <span class="pre">=</span> <span class="pre">pd.read_sql(pg_query,</span> <span class="pre">pg_engine)</span></code>
+Fungsi ini menjalankan query pada engine PostgreSQL (<code class="docutils literal notranslate"><span class="pre">pg_engine</span></code>) dan hasilnya disimpan dalam DataFrame <code class="docutils literal notranslate"><span class="pre">df_postgres</span></code></p>
+</section>
+<section id="menampilkan-data">
+<h3><strong>Menampilkan Data</strong><a class="headerlink" href="#menampilkan-data" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">print(&quot;Data</span> <span class="pre">dari</span> <span class="pre">MySQL:&quot;)</span></code><br />
+Mencetak judul untuk data yang diambil dari MySQL.<br />
+<code class="docutils literal notranslate"><span class="pre">print(df_mysql)</span></code><br />
+Menampilkan DataFrame yang berisi hasil query dari MySQL.<br />
+<code class="docutils literal notranslate"><span class="pre">print(&quot;\nData</span> <span class="pre">dari</span> <span class="pre">PostgreSQL:&quot;)</span></code><br />
+Mencetak judul untuk data yang diambil dari PostgreSQL dengan menambahkan newline (\n) agar output menjadi lebih rapi.<br />
+<code class="docutils literal notranslate"><span class="pre">print(df_postgres)</span></code><br />
+Menampilkan DataFrame hasil query dari PostgreSQL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data dari MySQL:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_mysql</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Data dari PostgreSQL:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_postgres</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data dari MySQL:
+      id           class  petal_length  petal_width
+0      1     Iris-setosa          70.0         86.4
+1      2     Iris-setosa           1.4          0.2
+2      3     Iris-setosa           1.3          0.2
+3      4     Iris-setosa           1.5          0.2
+4      5     Iris-setosa           1.4          0.2
+..   ...             ...           ...          ...
+145  146  Iris-virginica           5.2          2.3
+146  147  Iris-virginica           5.0          1.9
+147  148  Iris-virginica           5.2          2.0
+148  149  Iris-virginica           5.4          2.3
+149  150  Iris-virginica           5.1          1.8
+
+[150 rows x 4 columns]
+
+ Data dari PostgreSQL:
+      id           class  sepal_length  sepal_width
+0      1     Iris-setosa          20.1         30.5
+1      2     Iris-setosa           4.9          3.0
+2      3     Iris-setosa           4.7          3.2
+3      4     Iris-setosa           4.6          3.1
+4      5     Iris-setosa           5.0          3.6
+..   ...             ...           ...          ...
+145  146  Iris-virginica           6.7          3.0
+146  147  Iris-virginica           6.3          2.5
+147  148  Iris-virginica           6.5          3.0
+148  149  Iris-virginica           6.2          3.4
+149  150  Iris-virginica           5.9          3.0
+
+[150 rows x 4 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mengambil-data-dari-mysql">
+<h3><strong>Mengambil Data dari MySQL</strong><a class="headerlink" href="#mengambil-data-dari-mysql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mysql_petal</span> <span class="o">=</span> <span class="n">df_mysql</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;petal_width&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dari DataFrame <code class="docutils literal notranslate"><span class="pre">df_mysql</span></code>, kita hanya memilih kolom-kolom yang diperlukan
+<code class="docutils literal notranslate"><span class="pre">id</span></code>,<code class="docutils literal notranslate"><span class="pre">class</span></code>,<code class="docutils literal notranslate"><span class="pre">petal_length</span></code>,<code class="docutils literal notranslate"><span class="pre">petal_width</span></code><br />
+Data yang dipilih disimpan ke variabel <code class="docutils literal notranslate"><span class="pre">petal_data</span></code></p>
+</section>
+<section id="mengambil-data-dari-postgresql">
+<h3><strong>Mengambil Data dari PostgreSQL</strong><a class="headerlink" href="#mengambil-data-dari-postgresql" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">postgres_sepal</span> <span class="o">=</span> <span class="n">df_postgres</span><span class="p">[[</span><span class="s1">&#39;sepal_length&#39;</span><span class="p">,</span> <span class="s1">&#39;sepal_width&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dari DataFrame <code class="docutils literal notranslate"><span class="pre">df_postgres</span></code>, kita memilih dua kolom:<br />
+<code class="docutils literal notranslate"><span class="pre">sepal_length</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">sepal_width</span></code><br />
+Data ini disimpan ke variabel <code class="docutils literal notranslate"><span class="pre">sepal_data</span></code>.<br />
+Kenapa kok cuma mengambil dua kolom karena kita sudah mengambil kolom <code class="docutils literal notranslate"><span class="pre">id</span></code>,<code class="docutils literal notranslate"><span class="pre">class</span></code> di table petal dan untuk menghindari duplikasi</p>
+</section>
+<section id="menggabungkan-data">
+<h3><strong>Menggabungkan Data</strong><a class="headerlink" href="#menggabungkan-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">mysql_petal</span><span class="p">,</span> <span class="n">postgres_sepal</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">.merge()</span></code> menggabungkan dua DataFrame.
+Di sini, kita menggabungkan <code class="docutils literal notranslate"><span class="pre">petal_data</span></code> dan <code class="docutils literal notranslate"><span class="pre">sepal_data</span></code> dengan cara:<br />
+<code class="docutils literal notranslate"><span class="pre">left_index=True,</span> <span class="pre">right_index=True</span></code>: Menggabungkan berdasarkan index (baris) dari kedua DataFrame.<br />
+Jadi, baris pertama dari <code class="docutils literal notranslate"><span class="pre">petal_data</span></code> akan disandingkan dengan baris pertama dari <code class="docutils literal notranslate"><span class="pre">sepal_data</span></code>, dan seterusnya.</p>
+</section>
+<section id="menampilkan-hasil-gabungan">
+<h3><strong>Menampilkan Hasil Gabungan</strong><a class="headerlink" href="#menampilkan-hasil-gabungan" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">print(&quot;Data</span> <span class="pre">Gabungan:&quot;)</span></code> mencetak teks sebagai judul output.<br />
+<code class="docutils literal notranslate"><span class="pre">print(combined.head())</span></code> menampilkan 5 baris pertama dari DataFrame hasil penggabungan <code class="docutils literal notranslate"><span class="pre">(combined)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data Gabungan (Merge) dengan Class:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data Gabungan (Merge) dengan Class:
+   id        class  petal_length  petal_width  sepal_length  sepal_width
+0   1  Iris-setosa          70.0         86.4          20.1         30.5
+1   2  Iris-setosa           1.4          0.2           4.9          3.0
+2   3  Iris-setosa           1.3          0.2           4.7          3.2
+3   4  Iris-setosa           1.5          0.2           4.6          3.1
+4   5  Iris-setosa           1.4          0.2           5.0          3.6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="menyimpan-dataframe-gabungan-ke-file-csv">
+<h3><strong>menyimpan DataFrame gabungan ke file CSV</strong><a class="headerlink" href="#menyimpan-dataframe-gabungan-ke-file-csv" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">combined_df.to_csv(&quot;combined_data.csv&quot;,</span> <span class="pre">index=False)</span></code></p>
+<p>Fungsi <code class="docutils literal notranslate"><span class="pre">to_csv()</span></code> adalah metode dari DataFrame Pandas yang digunakan untuk menyimpan data ke dalam file CSV.<br />
+<code class="docutils literal notranslate"><span class="pre">&quot;combined_data.csv&quot;</span></code> adalah nama file output yang akan dibuat.<br />
+Parameter <code class="docutils literal notranslate"><span class="pre">index=False</span></code> berarti kita tidak menyimpan index baris ke dalam file CSV. Dengan begitu, file CSV hanya akan berisi data kolom tanpa nomor
+index.</p>
+<p><code class="docutils literal notranslate"><span class="pre">print(&quot;\nData</span> <span class="pre">gabungan</span> <span class="pre">telah</span> <span class="pre">disimpan</span> <span class="pre">ke</span> <span class="pre">file</span> <span class="pre">'combined_data.csv'.&quot;)</span></code><br />
+Baris ini mencetak pesan ke layar yang memberitahukan bahwa data gabungan sudah berhasil disimpan ke file CSV.<br />
+<code class="docutils literal notranslate"><span class="pre">\n</span></code> digunakan untuk memulai baris baru sehingga output lebih rapi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;combined_data.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data gabungan telah disimpan ke file &#39;combined_data.csv&#39;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data gabungan telah disimpan ke file &#39;combined_data.csv&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="profiling-data">
+<h2><strong>2. Profiling Data</strong><a class="headerlink" href="#profiling-data" title="Link to this heading">#</a></h2>
+<p><strong>Profiling Data</strong> adalah proses awal dalam data mining yang bertujuan untuk memahami dan mendokumentasikan karakteristik dasar suatu kumpulan data. Pada studi ini, kita menggunakan <strong>dataset Iris</strong> yang telah digabungkan dari dua sumber:</p>
+<p><strong>Data Iris Petal</strong> (dari MySQL)<br />
+<strong>Data Iris Sepal</strong> (dari PostgreSQL)</p>
+<p>Dengan melakukan data profiling pada data gabungan tersebut, kita dapat mengidentifikasi kualitas data, pola-pola umum, serta potensi masalah seperti data hilang atau duplikasi. Berikut adalah beberapa aspek penting dalam data profiling:</p>
+<p><strong>1. Statistik Deskriptif</strong><br />
+Menghitung nilai rata-rata (mean), median, modus, nilai minimum dan maksimum, serta variansi (variance) untuk setiap kolom numerik, seperti <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>.bertujuan untuk Memahami sebaran (distribution) dan karakteristik dasar dari tiap fitur. Misalnya, mencari panjang sepal rata-rata untuk spesies Iris tertentu.</p>
+<p><strong>2. Identifikasi Missing Values</strong><br />
+Mendeteksi apakah terdapat kolom yang memiliki nilai hilang (missing) atau tidak lengkap, baik pada kolom petal maupun sepal.bertujuan untuk Menentukan apakah perlu dilakukan penanganan khusus seperti imputasi (mengisi nilai yang hilang) atau penghapusan data yang tidak lengkap. Hal ini penting untuk menjaga kualitas analisis selanjutnya.</p>
+<p><strong>3. Kualitas Data</strong><br />
+Memeriksa konsistensi (misalnya, apakah panjang petal selalu lebih kecil dari panjang sepal), validitas (apakah ada nilai negatif untuk panjang atau lebar), dan keakuratan (apakah data sudah sesuai spesiesnya).bertujuan untuk Menjamin bahwa data yang akan digunakan untuk modeling memiliki kualitas memadai, sehingga hasil analisis atau model prediksi lebih dapat diandalkan.</p>
+<p><strong>4. Pemeriksaan Distribusi dan Outlier</strong><br />
+Meninjau distribusi data pada tiap fitur (misalnya, menggunakan histogram atau box plot untuk <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>) guna mengidentifikasi outlier atau nilai yang tidak biasa.bertujuan untuk Menentukan apakah perlu melakukan transformasi data (misalnya, log transform) atau penanganan khusus pada outlier (misalnya, penghapusan atau pemisahan data ekstrem) agar model machine learning dapat bekerja lebih optimal.</p>
+<p><strong>5. Analisis Korelasi</strong><br />
+Mengukur hubungan antara fitur-fitur (kolom) di dalam dataset gabungan, seperti <code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>.bertujuan untuk Mengidentifikasi fitur-fitur yang saling terkait, yang dapat membantu dalam pembuatan model klasifikasi atau clustering. Misalnya, jika <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dan <code class="docutils literal notranslate"><span class="pre">petal_width</span></code> memiliki korelasi tinggi, hal ini dapat menjadi petunjuk untuk analisis lebih lanjut.</p>
+<p><strong>6. Profiling Metadata</strong><br />
+Menganalisis informasi tentang tipe data (apakah numerik atau kategorikal), jumlah record total setelah penggabungan, dan atribut yang tersedia (misalnya, apakah ada kolom tambahan seperti <code class="docutils literal notranslate"><span class="pre">class</span></code> atau <code class="docutils literal notranslate"><span class="pre">id</span></code>).bertujuan untuk Mendapatkan gambaran umum mengenai struktur dataset. Misalnya, berapa banyak baris data setosa, versicolor, dan virginica, serta bagaimana distribusi jumlah record per spesies.</p>
+<p>Dengan melakukan <strong>profiling data</strong> secara menyeluruh pada dataset Iris yang digabungkan dari MySQL (petal) dan PostgreSQL (sepal), kita dapat memperoleh pemahaman yang lebih baik mengenai kualitas data, distribusi fitur, dan hubungan antarvariabel. Informasi ini sangat membantu untuk menentukan langkah pembersihan (cleaning) dan persiapan data (data preparation) sebelum masuk ke tahap modeling.</p>
+<section id="statistik-deskriptif">
+<h3><strong>Statistik Deskriptif</strong>:<a class="headerlink" href="#statistik-deskriptif" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">combined_df.describe(include='all')</span></code> menghitung statistik deskriptif (<code class="docutils literal notranslate"><span class="pre">mean,</span> <span class="pre">std,</span> <span class="pre">min,</span> <span class="pre">max,</span></code> dan sebagainya) untuk kolom numerik dan juga menampilkan informasi kategori untuk kolom non-numerik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistik Deskriptif:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_df</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Statistik Deskriptif:
+                id        class  petal_length  petal_width  sepal_length  \
+count   150.000000          150    150.000000   150.000000    150.000000   
+unique         NaN            3           NaN          NaN           NaN   
+top            NaN  Iris-setosa           NaN          NaN           NaN   
+freq           NaN           50           NaN          NaN           NaN   
+mean     75.500000          NaN      4.216000     1.773333      6.301333   
+std      43.445368          NaN      5.684573     6.997369      4.638719   
+min       1.000000          NaN      1.000000     0.100000      4.300000   
+25%      38.250000          NaN      1.600000     0.300000      5.100000   
+50%      75.500000          NaN      4.400000     1.300000      5.800000   
+75%     112.750000          NaN      5.100000     1.800000      6.400000   
+max     150.000000          NaN     70.000000    86.400000     60.000000   
+
+        sepal_width  
+count    150.000000  
+unique          NaN  
+top             NaN  
+freq            NaN  
+mean       3.412000  
+std        3.160047  
+min        2.000000  
+25%        2.800000  
+50%        3.000000  
+75%        3.300000  
+max       30.500000  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pemeriksaan-missing-values">
+<h3><strong>Pemeriksaan Missing Values:</strong><a class="headerlink" href="#pemeriksaan-missing-values" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">combined_df.isnull().sum()</span></code> menghitung jumlah nilai yang hilang (missing) di setiap kolom.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah Missing Values per Kolom:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah Missing Values per Kolom:
+id              0
+class           0
+petal_length    0
+petal_width     0
+sepal_length    0
+sepal_width     0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribusi-data">
+<h3><strong>Distribusi Data:</strong><a class="headerlink" href="#distribusi-data" title="Link to this heading">#</a></h3>
+<p>Menggunakan Seaborn untuk membuat histogram dari kolom <code class="docutils literal notranslate"><span class="pre">petal_length</span></code> dengan overlay KDE (Kernel Density Estimation) agar lebih mudah melihat distribusi data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribusi Petal Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Petal Length&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b5de323e0f2dde19709e0cd94eb68a1ccfb7d69d1a30942f67ea3c414d1d7aec.png" src="_images/b5de323e0f2dde19709e0cd94eb68a1ccfb7d69d1a30942f67ea3c414d1d7aec.png" />
+</div>
+</div>
+</section>
+<section id="analisis-korelasi">
+<h3><strong>Analisis Korelasi</strong><a class="headerlink" href="#analisis-korelasi" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">combined_df.corr()</span></code>menghitung matriks korelasi antar fitur numerik.<br />
+Heatmap korelasi divisualisasikan menggunakan Seaborn untuk memudahkan interpretasi hubungan antar variabel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hapus kolom &quot;class&quot; dari DataFrame gabungan</span>
+<span class="n">combined_df_numeric</span> <span class="o">=</span> <span class="n">combined_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">])</span>
+
+<span class="c1"># Hitung dan tampilkan matriks korelasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriks Korelasi:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_df_numeric</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriks Korelasi:
+                    id  petal_length  petal_width  sepal_length  sepal_width
+id            1.000000      0.135110    -0.043644      0.136322    -0.119622
+petal_length  0.135110      1.000000     0.977805      0.310854     0.674918
+petal_width  -0.043644      0.977805     1.000000      0.273215     0.705738
+sepal_length  0.136322      0.310854     0.273215      1.000000     0.833453
+sepal_width  -0.119622      0.674918     0.705738      0.833453     1.000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_df_numeric</span> <span class="o">=</span> <span class="n">combined_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">,</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">combined_df_numeric</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Matriks Korelasi Antar Variabel Numerik&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e13ffc9be31ac1c37cf8bcdd6d9ab0b89a1e768b8d4e7e80eaf1a79bc6920a3a.png" src="_images/e13ffc9be31ac1c37cf8bcdd6d9ab0b89a1e768b8d4e7e80eaf1a79bc6920a3a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="visualisasi-data">
+<h2><strong>3. Visualisasi Data</strong><a class="headerlink" href="#visualisasi-data" title="Link to this heading">#</a></h2>
+<p>Visualisasi data adalah teknik yang digunakan untuk menyajikan data dalam bentuk grafik atau diagram sehingga lebih mudah dipahami.<br />
+Berikut adalah beberapa jenis visualisasi yang sering digunakan:</p>
+<p><strong>Histogram</strong><br />
+Digunakan untuk melihat distribusi data numerik.<br />
+Memungkinkan kita mengetahui apakah data berdistribusi normal, miring ke kiri/kanan, atau memiliki banyak puncak.<br />
+Sumbu X menunjukkan nilai variabel, sedangkan sumbu Y menunjukkan frekuensi kemunculannya.</p>
+<p><strong>Box Plot</strong>
+Membantu mendeteksi outliers (nilai ekstrem).<br />
+Menunjukkan distribusi data melalui lima statistik utama: minimum, kuartil pertama (Q1), median (Q2), kuartil ketiga (Q3), dan maksimum.<br />
+Outliers biasanya ditampilkan sebagai titik di luar whiskers.</p>
+<p><strong>Scatter Plot</strong><br />
+Digunakan untuk melihat hubungan antara dua variabel numerik.<br />
+Jika ada pola tertentu (garis lurus, kurva, dll.), berarti ada hubungan antara kedua variabel.<br />
+Bisa digunakan untuk mendeteksi kluster atau outliers.</p>
+<p><strong>Bar Chart/Pie Chart</strong><br />
+Bar Chart digunakan untuk memvisualisasikan data kategorikal (misalnya jumlah outlier vs non-outlier).<br />
+Pie Chart digunakan untuk menunjukkan proporsi kategori dalam bentuk lingkaran.</p>
+<section id="histogram">
+<h3><strong>Histogram</strong><a class="headerlink" href="#histogram" title="Link to this heading">#</a></h3>
+<p>Histogram adalah grafik yang menunjukkan seberapa sering nilai tertentu muncul dalam data. Ini membantu kita memahami apakah data terdistribusi normal atau ada pola tertentu</p>
+<p><code class="docutils literal notranslate"><span class="pre">sns.histplot(data[col],</span> <span class="pre">bins=20,</span> <span class="pre">kde=True,</span> <span class="pre">ax=axes[i//2,</span> <span class="pre">i%2])</span></code> → Membuat histogram untuk fitur tertentu dengan 20 bins (kelompok data) dan menambahkan kurva kepadatan (kde=True).<br />
+<code class="docutils literal notranslate"><span class="pre">plt.tight_layout()</span></code> → Supaya semua grafik tidak bertumpuk.<br />
+<code class="docutils literal notranslate"><span class="pre">plt.show()</span></code> → Untuk menampilkan grafiknya.</p>
+<p><strong>Fungsi Histogram</strong>:<br />
+Membantu melihat apakah data terdistribusi normal.<br />
+Bisa mendeteksi apakah ada outlier (misalnya, ada nilai yang jauh dari mayoritas data).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Membuat 4 histogram dalam satu gambar</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Daftar fitur yang akan divisualisasikan</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">]</span>
+
+<span class="c1"># Loop untuk membuat histogram setiap fitur</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">combined_df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>])  # Histogram dengan 20 bins
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>].set_title(f&quot;Distribusi {col}&quot;)  # Judul grafik
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  <span class="c1"># Mengatur tata letak agar rapi</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Menampilkan grafik</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ff5281ee6e22a83f04821bba726e6e557804b45aa69bd129b4404257e7d0e1ac.png" src="_images/ff5281ee6e22a83f04821bba726e6e557804b45aa69bd129b4404257e7d0e1ac.png" />
+</div>
+</div>
+</section>
+<section id="box-plot">
+<h3><strong>Box Plot</strong><a class="headerlink" href="#box-plot" title="Link to this heading">#</a></h3>
+<p>Box plot digunakan untuk melihat sebaran data dan mendeteksi nilai outlier. Outlier biasanya terlihat sebagai titik yang jauh dari “kotak”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sns.boxplot(x=data[col],</span> <span class="pre">ax=axes[i//2,</span> <span class="pre">i%2])</span></code> → Membuat boxplot untuk setiap fitur.<br />
+Titik di luar garis atas/bawah → Outliers!</p>
+<p><strong>Fungsi Box Plot</strong>:
+Menunjukkan rentang data (min, max, median).<br />
+Membantu mendeteksi outliers (nilai ekstrim yang jauh dari mayoritas data).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>])  # Membuat boxplot untuk setiap fitur
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>].set_title(f&quot;Boxplot {col}&quot;)
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ab72e4d207cff73070595464ba84a9fd74f7c66f48ed0b37224810c559ddf66b.png" src="_images/ab72e4d207cff73070595464ba84a9fd74f7c66f48ed0b37224810c559ddf66b.png" />
+</div>
+</div>
+</section>
+<section id="scatter-plot">
+<h3><strong>Scatter Plot</strong><a class="headerlink" href="#scatter-plot" title="Link to this heading">#</a></h3>
+<p>Scatter plot adalah grafik yang memperlihatkan hubungan antara dua variabel. Jika ada pola (misalnya naik atau turun), itu berarti ada hubungan di antara keduanya</p>
+<p><strong>Fungsi Scatter Plot</strong>:<br />
+Menunjukkan apakah dua variabel memiliki hubungan tertentu.<br />
+Jika ada pola naik/turun, bisa jadi ada korelasi antara variabel tersebut.</p>
+<p><strong>Menghapus Kolom yang Tidak Diperlukan</strong><br />
+disini kita tidak memperlukan class karena class nya berupa string<br />
+<code class="docutils literal notranslate"><span class="pre">errors=&quot;ignore&quot;</span></code> digunakan agar tidak error jika kolom <code class="docutils literal notranslate"><span class="pre">&quot;class&quot;</span></code> tidak ada dalam dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_df</span> <span class="o">=</span> <span class="n">combined_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">NearestNeighbors</span>
+
+<span class="c1"># Hapus kolom &quot;class&quot;</span>
+<span class="n">combined_df</span> <span class="o">=</span> <span class="n">combined_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Inisialisasi model K-Nearest Neighbors</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">combined_df</span><span class="p">)</span>
+
+<span class="c1"># Hitung rata-rata jarak ke k tetangga terdekat</span>
+<span class="n">distances_knn</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">kneighbors</span><span class="p">(</span><span class="n">combined_df</span><span class="p">)</span>
+<span class="n">mean_knn_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances_knn</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Tentukan threshold outlier</span>
+<span class="n">threshold_knn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_knn_distances</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mean_knn_distances</span><span class="p">)</span>
+
+<span class="c1"># Temukan indeks outlier</span>
+<span class="n">outliers_knn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mean_knn_distances</span> <span class="o">&gt;</span> <span class="n">threshold_knn</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Default semua bukan outlier</span>
+<span class="n">combined_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outliers_knn</span><span class="p">,</span> <span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Tandai outlier</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">],</span> 
+                    <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>])
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>].set_title(f&quot;Scatter Plot {col} vs Sepal Width&quot;)
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2667529449adb6b9ffd45f65838f2250001a0c7f740119d3f54381ff615e16fc.png" src="_images/2667529449adb6b9ffd45f65838f2250001a0c7f740119d3f54381ff615e16fc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Default semua bukan outlier</span>
+<span class="n">combined_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outliers_knn</span><span class="p">,</span> <span class="s2">&quot;outlier&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Tandai outlier</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">features</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">combined_df</span><span class="p">[</span><span class="s2">&quot;outlier&quot;</span><span class="p">],</span> 
+                    <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>])
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span>].set_title(f&quot;Scatter Plot {col} vs Sepal Width&quot;)
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2667529449adb6b9ffd45f65838f2250001a0c7f740119d3f54381ff615e16fc.png" src="_images/2667529449adb6b9ffd45f65838f2250001a0c7f740119d3f54381ff615e16fc.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="TugasPertemuan1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Konsep Dasar Data Mining</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Konsep-dasar-KNN.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Macam-macam tipe data dan Konsep dasar KNN</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-data-understanding"><strong>Apa itu Data Understanding?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan-data-understanding"><strong>Tujuan Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-langkah-dalam-data-understanding"><strong>Langkah-Langkah dalam Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-kasus-data-understanding-dalam-praktik"><strong>Contoh Kasus: Data Understanding dalam Praktik</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manfaat-data-understanding"><strong>Manfaat Data Understanding</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan"><strong>Kesimpulan</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#untuk-memahami-data-understanding-perlu-library"><strong>Untuk memahami Data Understanding perlu library</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengumpulan-data"><strong>1. Pengumpulan Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langkah-pengumpulan-data"><strong>Langkah Pengumpulan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-aiven-io"><strong>Apa itu Aiven.io?</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-iris"><strong>Dataset Iris</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sumber-data"><strong>Sumber Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library"><strong>Import Library</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memuat-file-env"><strong>Memuat File <code class="docutils literal notranslate"><span class="pre">.env</span></code></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konfigurasi-koneksi-database"><strong>Konfigurasi Koneksi Database</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyusun-string-koneksi-postgresql"><strong>Menyusun String Koneksi PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyusun-string-koneksi-mysql"><strong>Menyusun String Koneksi MySQL:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-engine-database"><strong>Membuat Engine Database</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#blok-try-finally"><strong>Blok Try-Finally</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-query-untuk-mysql"><strong>Definisi Query untuk MySQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definisi-query-untuk-postgresql"><strong>Definisi Query untuk PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-data"><strong>Menampilkan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-mysql"><strong>Mengambil Data dari MySQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-dari-postgresql"><strong>Mengambil Data dari PostgreSQL</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-data"><strong>Menggabungkan Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menampilkan-hasil-gabungan"><strong>Menampilkan Hasil Gabungan</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menyimpan-dataframe-gabungan-ke-file-csv"><strong>menyimpan DataFrame gabungan ke file CSV</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profiling-data"><strong>2. Profiling Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistik-deskriptif"><strong>Statistik Deskriptif</strong>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pemeriksaan-missing-values"><strong>Pemeriksaan Missing Values:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribusi-data"><strong>Distribusi Data:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-korelasi"><strong>Analisis Korelasi</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisasi-data"><strong>3. Visualisasi Data</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram"><strong>Histogram</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plot"><strong>Box Plot</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot"><strong>Scatter Plot</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Data Engineering wanna be
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
